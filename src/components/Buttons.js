@@ -10,11 +10,11 @@ export const DefaultButton = styled.button`
   text-transform: capitalize;
   padding: 0.25rem;
   display: block;
-  width: 200px;
-  margin: 1rem auto;
+  width:150px;
+ 
 `
 export const HipsterButton = styled(DefaultButton)`
-width: 400px;
+
 background:transparent;
 color:#645cff;
 border: 1px solid #645cff;

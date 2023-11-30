@@ -8,13 +8,13 @@ const getSearchData = async (params) =>{
    url: "https://api.jikan.moe/v4/anime",
    params: {
      q: `${params}`,
-     limit: 50,
-     score: "0",
+     limit: 15,
+     
    },
  };
    try {
      const response = await axios.request(options);
-     return response.data;
+     return response.data.data;
    } catch (err) {
      console.log(err);
    }
