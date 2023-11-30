@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
+import BasicTitle from './components/BasicTitle';
+import { DefaultButton, HipsterButton } from './components/Buttons';
+import Button from "@mui/material/Button";
+import ComplexTitle from './components/ComplexTitle';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "2rem" }}>
+      <BasicTitle special>Styled components</BasicTitle>
+      <BasicTitle >Styled components</BasicTitle>
+      <DefaultButton>Click me!</DefaultButton>
+      <HipsterButton>Click me!</HipsterButton>
+      <Button color='primary' variant={'contained'}>Click me!</Button>
+      <StyledBtn variant={'contained'}>Click me!</StyledBtn>
+      <ComplexTitle title='more complex title'/>
     </div>
   );
-}
+};
 
 export default App;
+
+const StyledBtn = styled(Button)`
+text-transform: lowercase;
+color:black;
+background-color: black;
+`

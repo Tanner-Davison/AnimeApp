@@ -7,7 +7,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.title{
+  text-align: center;
+  text-transform: capitalize;
+}
+.btn{
+  background-color: #645cff;
+  color:#fff;
+  border:none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-transform: capitalize;
+  padding:0.25rem;
+  display:block;
+  width:200px;
+  margin:1rem auto;
+
 }
