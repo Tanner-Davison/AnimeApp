@@ -18,5 +18,4 @@ width: 400px;
 background:transparent;
 color:#645cff;
 border: 1px solid #645cff;
-
 `

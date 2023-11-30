@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const ComplexTitle = ({title}) => {
+const ComplexComponent = ({title}) => {
   return (
     <Wrapper>
       <h1>{title}</h1>
@@ -20,7 +20,6 @@ h1{
     width:0.25rem;
     height: 0.25rem;
     background:red;
-
 }
 `
-export default ComplexTitle
+export default ComplexComponent;

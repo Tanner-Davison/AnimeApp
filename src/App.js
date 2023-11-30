@@ -1,29 +1,45 @@
 import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import BasicTitle from './components/BasicTitle';
-import { DefaultButton, HipsterButton } from './components/Buttons';
-import Button from "@mui/material/Button";
-import ComplexTitle from './components/ComplexTitle';
+import ComplexComponent from './components/ComplexComponent';
+import getSearchData from './API/getSearchData';
+import SearchContainer from './SearchContainer';
 
 function App() {
-  
+   const [searchQuery, setSearchQuery] = useState('');
+   const [searchResult, setSearchResult] = useState('');
+   const [loading, setLoading] = useState('');
+
+   const handleSearch = async () => {
+     if (searchQuery.trim() !== "") {
+       setLoading(true);
+       try {
+         const searchData = await getSearchData(searchQuery);
+         setSearchResult(searchData);
+       } catch (error) {
+         console.error("Error fetching data:", error);
+       } finally {
+         setLoading(false);
+       }
+     } else {
+       console.error("Search query is empty");
+     }
+   };
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <BasicTitle special>Styled components</BasicTitle>
-      <BasicTitle >Styled components</BasicTitle>
-      <DefaultButton>Click me!</DefaultButton>
-      <HipsterButton>Click me!</HipsterButton>
-      <Button color='primary' variant={'contained'}>Click me!</Button>
-      <StyledBtn variant={'contained'}>Click me!</StyledBtn>
-      <ComplexTitle title='more complex title'/>
-    </div>
+    <>
+      <BasicTitle> Find Your Favorite Anime </BasicTitle>
+
+      <SearchContainer
+        searchQuery={searchQuery}
+        onSearch={()=> handleSearch()}
+        onQueryChange={(query)=> setSearchQuery(query)}
+        loading={loading}/>
+      <ComplexComponent title='more complex title'/>
+    </>
   );
 };
 
 export default App;
 
-const StyledBtn = styled(Button)`
-text-transform: lowercase;
-color:black;
-background-color: black;
-`
