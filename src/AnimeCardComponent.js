@@ -11,11 +11,11 @@ const AnimeCardComponent = ({ animeData }) => {
   const animeImg = animeData.images.jpg.image_url;
 
   return (
-    <CardWrapper>
+    <CardWrapper showSummary={showSummary}>
       <ComplexTitle title={title} />
       <div className={"card"}>
         <img src={animeImg} alt={"animeImg"} />
-        <div>
+        
           {showSummary ? (
             <DefaultButton
               onClick={() => {
@@ -33,7 +33,7 @@ const AnimeCardComponent = ({ animeData }) => {
               <article showSummary>{animeData.synopsis}</article>
             }
               </div>
-        </div>
+        
       </div>
       <div></div>
     </CardWrapper>
@@ -51,6 +51,7 @@ const CardWrapper = styled.div`
   justify-content: center;
   background: transparent;
   width: 100vw;
+
   height: auto;
   z-index: 150;
 
@@ -66,30 +67,47 @@ const CardWrapper = styled.div`
     flex-direction: column;
     gap: 1rem;
     width: 55vw;
+    max-height: ${({ showSummary }) => (showSummary ? "fit-content" : "500px")};
     padding: 1rem;
-    border: 2px solid red;
+    text-align: center;
+    border-radius:17px;
+    transition: max-height 1s ease-in-out;
+    animation: slideDown 1s 1;
   }
 
   .dropDownElement {
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: scroll;
     width: 100%;
+    background: snow;
     margin-top: 10px;
-    overflow-y: hidden;
-    max-height: ${({ showSummary }) => (showSummary ? "0px" : "500px")};
-    transition: max-height 2s ease-in-out;
+    text-overflow: clip;
+    border-radius: 17px;
+    transition: max-height 1s ease-in-out;
+    overflow: hidden;
   }
 
   article {
     position: relative;
+    display: flex;
     padding: 2rem 0;
     font-family: "Archivo", sans-serif;
-    background-color: whitesmoke;
+    background-color: snow;
     line-height: 1.3rem;
     color: black;
-    width: 100%;
+    max-width: 80%;
+    overflow: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
     transition: height 0.4s ease-out;
     animation: ${({ showSummary }) =>
       showSummary ? "slideDown .5s forwards" : "slideUp 1s forwards"};
+  }
+  article::-webkit-scrollbar {
+    display: none;
   }
 
   @keyframes slideDown {

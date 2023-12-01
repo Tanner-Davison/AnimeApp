@@ -1,14 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import styled from "styled-components";
 import BasicTitle from "./components/BasicTitle";
-import ComplexComponent from "./components/ComplexTitle";
 import getSearchData from "./API/getSearchData";
 import SearchContainer from "./SearchContainer";
 import AnimeCardComponent from "./AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
-import clouds1 from './components/imgs/clouds1.jpeg';
-import clouds2 from './components/imgs/clouds2.avif';
+import OnePunchMan from './components/imgs/OnePunchMan.jpg'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,23 +28,21 @@ function App() {
       console.error("Search query is empty");
     }
   };
-  useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
+
   return (
     <Wrapper>
-      <Header className={"header"}>
-        <BasicTitle> Find Your Favorite Anime </BasicTitle>
-      <SearchContainer
-        searchQuery={searchQuery}
-        onSearch={() => handleSearch()}
-          onQueryChange={(query) => setSearchQuery(query)}
-          
-        loading={loading}
-      />
-      </Header>
+      <HeaderWrapper>
+        <Header className={"header"}>
+          <BasicTitle>Search For Any Anime </BasicTitle>
+          <SearchContainer
+            searchQuery={searchQuery}
+            onSearch={() => handleSearch()}
+            onQueryChange={(query) => setSearchQuery(query)}
+            loading={loading}
+          />
+        </Header>
+      </HeaderWrapper>
 
-    
       {searchResult !== "" &&
         searchResult.map((result) => {
           return <AnimeCardComponent animeData={result} />;
@@ -59,14 +55,15 @@ export default App;
 const Wrapper = styled.div`
 position: sticky;;
 top:0px;
-height: fit-content;
+height: 100vw;
+overflow-y:scroll;
 display:flex;
 flex-direction: column;
 border: 5px solid red;
 width: 100vw;
-background-image:url(${clouds2});
-background-repeat:repeat;
-background-position:contain;
+background-image:url(${OnePunchMan});
+background-repeat:no-repeat;
+background-size:cover;
 z-index: 139;
 
 `
@@ -83,7 +80,24 @@ const Header = styled.div`
   margin: 1rem auto;
   background-image: url(${AnimeFinal});
   background-size: cover;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   padding: 1rem;
+  
   z-index: 100;
+`;
+const HeaderWrapper = styled.div`
+  position: relative;
+  display: flex;
+  width: 80vw;
+  margin: 1rem auto;
+  align-items: center;
+  justify-content: center;
+  border-radius:17px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); 
+  z-index: 1;
 `;
