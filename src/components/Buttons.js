@@ -18,7 +18,6 @@ export const DefaultButton = styled.button`
   transition: transform 0.4s ease;
 `;
 export const HipsterButton = styled(DefaultButton)`
-
 background:transparent;
 color:#645cff;
 border: 1px solid #645cff;
@@ -26,4 +25,5 @@ border: 1px solid #645cff;
   transform: scale(1.1)
 }
 transition: transform .4s ease;
+
 `

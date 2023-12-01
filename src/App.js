@@ -3,8 +3,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
-import SearchContainer from "./SearchContainer";
-import AnimeCardComponent from "./AnimeCardComponent";
+import SearchContainer from "./components/SearchContainer";
+import AnimeCardComponent from "./components/AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
 import OnePunchMan from "./components/imgs/OnePunchMan.jpg";
 
@@ -39,7 +39,6 @@ function App() {
             onSearch={() => handleSearch()}
             onQueryChange={(query) => setSearchQuery(query)}
             loading={loading}
-            
           />
         </Header>
       </HeaderWrapper>
