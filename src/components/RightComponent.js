@@ -1,25 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+import ComplexTitle from "./ComplexTitle";
 
 
 const RightComponent = ({episodes, score, scoredBy}) => {
     return (
 			<Wrapper>
-				<div className={"centeredDiv"}>
-					All Episodes: <span>{episodes}</span>
-				</div>
 				<h3>
 					{" "}
 					<div className={"scoreDiv"}>
-						<h1>Anime Score </h1>
-						<span> {score} / 10</span>
+						<ComplexTitle title={"Anime Score"} />
+						<span id={"number"}>
+							{" "}
+							{score} /<em id='ten'>10</em>{" "}
+						</span>
 						<h5>
 							<div className={"scoredBy"}>
 								<em>OVER</em>
 								<span>
-									{scoredBy} <em>people</em>
+									<em id={"numberBig"}>{scoredBy}</em> <em>people</em>
 								</span>
 								Have participated in the scoring of these results.
+							</div>
+							<div className={"centeredDiv"}>
+								# of Episodes: <span>{episodes}</span>
 							</div>
 						</h5>
 					</div>
@@ -42,13 +46,15 @@ const Wrapper = styled.div`
 	h3 {
 		color: white;
 		font-family: Archivo;
+        font-size: 1.2rem;
 	}
-    h1{
+    h2{
         text-decoration:underline;
+
     }
     span{
         font-family: Archivo;
-        font-size:32px;
+        font-size:2rem;
     }
     .scoreDiv{
         position: relative;
@@ -56,6 +62,7 @@ const Wrapper = styled.div`
         flex-direction:column;
         align-items: center;
         justify-content: center;
+        gap:10px;
     }
     .scoredBy{
            display: flex;
@@ -63,16 +70,27 @@ const Wrapper = styled.div`
     width: 166px;
     border-radius:18px;
     background: rgba(0,0,0,0.4);
-    gap: 0px;
+    gap: 5px;
     align-items: center;
     justify-content: center;
 }
-    }
+    
     .centeredDiv{
         position: relative;
         display:flex;
         align-items: center;
         justify-content: center;
 
+    }
+    #number{
+        text-transform: capitalize;
+        color:goldenrod;
+    }
+    #numberBig{
+        text-transform: capitalize;
+        color:green;
+    }
+    #ten{
+        color:royalblue;
     }
 `;

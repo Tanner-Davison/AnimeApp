@@ -15,8 +15,8 @@ const AnimeCardComponent = ({ animeData }) => {
 	return (
 		<CardWrapper showSummary={showSummary}>
 			<div className={"card"}>
+				<h3 id='creative'> {title}</h3>
 				<LeftHeader>
-					<ComplexTitle title={title} />
 					<img
 						src={animeImg}
 						alt={"animeImg"}
@@ -36,9 +36,10 @@ const AnimeCardComponent = ({ animeData }) => {
 						</HipsterButton>
 					)}
 				</LeftHeader>
-				<RightComponent episodes={episodes}score={score} scoredBy={scoredBy} >
-
-				</RightComponent>
+				<RightComponent
+					episodes={episodes}
+					score={score}
+					scoredBy={scoredBy}></RightComponent>
 
 				<div
 					className={showSummary ? "dropDownElement" : "dropDownElement drop"}>
@@ -72,17 +73,26 @@ const CardWrapper = styled.div`
 	width: 63vw;
 	height: ${({ showSummary }) => showSummary && "fit-content"};
 	z-index: 1;
-
+	#creative {
+		position: absolute;
+		left: 34%;
+		left: 250px;
+		right: 250px;
+		top: -15px;
+		font-size: 32px;
+	}
 	.card {
 		position: relative;
 		display: flex;
-		align-items: flex-start;
+		align-items: flex-end;
 		background-color: black;
-		min-height: 300px;
-		flex-direction: row;
+		min-height: 426px;
+		
 		background: rgba(0, 0, 0, 0.87);
 		gap: 1rem;
 		width: 55vw;
+		color: white;
+		justify-content: center;
 		padding: 1rem;
 		text-align: center;
 		border-radius: 17px;
@@ -108,7 +118,7 @@ const CardWrapper = styled.div`
 		border-radius: 17px;
 		overflow: hidden;
 		animation: slideDown 0.6s forwards;
-		z-index: -2;
+		z-index: 4;
 		h3 {
 			color: white;
 			align-self: center;
@@ -143,6 +153,7 @@ const CardWrapper = styled.div`
 		animation: ${({ showSummary }) => showSummary && "slideDown .8s forwards"};
 		z-index: -2;
 	}
+
 	article::-webkit-scrollbar {
 		display: none;
 	}
@@ -176,10 +187,10 @@ const LeftHeader = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	flex-direction: column;
-	gap: 5px;
 	height: 100%;
+	gap: 25px;
 	width: 25%;
 	z-index: 1;
 	img {
@@ -188,7 +199,7 @@ const LeftHeader = styled.div`
 		border-radius: 17px;
 		transition: transform 0.3s ease-in-out;
 		cursor: pointer;
-		margin-bottom: 5%;
+
 		z-index: -3;
 	}
 	img:hover {
@@ -197,4 +208,5 @@ const LeftHeader = styled.div`
 	#defaultButton {
 		z-index: 5;
 	}
+	
 `;
