@@ -3,13 +3,15 @@ import { useState } from "react";
 import React from "react";
 import ComplexTitle from "./ComplexTitle";
 import { HipsterButton, DefaultButton } from "./Buttons";
-
+import RightComponent from "./RightComponent";
 const AnimeCardComponent = ({ animeData }) => {
-	console.log(animeData);
+	
 	const [showSummary, setShowSummary] = useState(false);
 	const title = animeData.title_english || animeData.title;
 	const animeImg = animeData.images.jpg.image_url;
-
+	const episodes = animeData.episodes;
+	const score = animeData.score;
+	const scoredBy = animeData.scored_by;
 	return (
 		<CardWrapper showSummary={showSummary}>
 			<div className={"card"}>
@@ -34,6 +36,9 @@ const AnimeCardComponent = ({ animeData }) => {
 						</HipsterButton>
 					)}
 				</LeftHeader>
+				<RightComponent episodes={episodes}score={score} scoredBy={scoredBy} >
+
+				</RightComponent>
 
 				<div
 					className={showSummary ? "dropDownElement" : "dropDownElement drop"}>
@@ -74,7 +79,7 @@ const CardWrapper = styled.div`
 		align-items: flex-start;
 		background-color: black;
 		min-height: 300px;
-		flex-direction: column;
+		flex-direction: row;
 		background: rgba(0, 0, 0, 0.87);
 		gap: 1rem;
 		width: 55vw;
@@ -175,7 +180,7 @@ const LeftHeader = styled.div`
 	flex-direction: column;
 	gap: 5px;
 	height: 100%;
-	width: 45%;
+	width: 25%;
 	z-index: 1;
 	img {
 		position: relative;
