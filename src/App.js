@@ -1,18 +1,18 @@
 import React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
 import SearchContainer from "./SearchContainer";
 import AnimeCardComponent from "./AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
-import OnePunchMan from './components/imgs/OnePunchMan.jpg'
+import OnePunchMan from "./components/imgs/OnePunchMan.jpg";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [showSummary, setShowSummary] = useState(false);
   const handleSearch = async () => {
     if (searchQuery.trim() !== "") {
       setLoading(true);
@@ -39,13 +39,14 @@ function App() {
             onSearch={() => handleSearch()}
             onQueryChange={(query) => setSearchQuery(query)}
             loading={loading}
+            
           />
         </Header>
       </HeaderWrapper>
 
       {searchResult !== "" &&
         searchResult.map((result) => {
-          return <AnimeCardComponent animeData={result} />;
+          return <AnimeCardComponent animeData={result} showSummary={showSummary} setShowSummary={setShowSummary} />;
         })}
     </Wrapper>
   );
@@ -53,27 +54,30 @@ function App() {
 
 export default App;
 const Wrapper = styled.div`
-position: sticky;;
-top:0px;
-height: 100vw;
-overflow-y:scroll;
-display:flex;
-flex-direction: column;
-border: 5px solid red;
-width: 100vw;
-background-image:url(${OnePunchMan});
-background-repeat:no-repeat;
-background-size:cover;
-z-index: 139;
-
-`
+  position: sticky;
+  top: 0px;
+  height: 99vh;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid red;
+  width: 99vw;
+  background-image: url(${OnePunchMan});
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 139;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+`;
 const Header = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  top:0px;
+  top: 0px;
   width: 50vw;
   height: auto;
   border-radius: 18px;
@@ -82,22 +86,17 @@ const Header = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   padding: 1rem;
-  
+
   z-index: 100;
 `;
 const HeaderWrapper = styled.div`
   position: relative;
   display: flex;
-  width: 80vw;
+  width: 60vw;
   margin: 1rem auto;
   align-items: center;
   justify-content: center;
-  border-radius:17px;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); 
+  border-radius: 17px;
+  background-color: rgba(1111,1111, 1111, 0.3);
   z-index: 1;
 `;

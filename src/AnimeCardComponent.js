@@ -4,16 +4,18 @@ import React from "react";
 import ComplexTitle from "./components/ComplexTitle";
 import { HipsterButton, DefaultButton } from "./components/Buttons";
 
-const AnimeCardComponent = ({ animeData }) => {
+const AnimeCardComponent = ({ animeData}) => {
   console.log(animeData);
   const [showSummary, setShowSummary] = useState(false);
   const title = animeData.title;
   const animeImg = animeData.images.jpg.image_url;
 
+  
   return (
     <CardWrapper showSummary={showSummary}>
-      <ComplexTitle title={title} />
       <div className={"card"}>
+        <LeftHeader>
+      <ComplexTitle title={title} />
         <img src={animeImg} alt={"animeImg"} />
         
           {showSummary ? (
@@ -25,17 +27,19 @@ const AnimeCardComponent = ({ animeData }) => {
             </DefaultButton>
           ) : (
             <HipsterButton onClick={() => setShowSummary(true)}>
-              Show Summary
+             Read Summary
             </HipsterButton>
           )}
-            <div className="dropDownElement" >
-            {showSummary &&
-              <article showSummary>{animeData.synopsis}</article>
-            }
-              </div>
+         </LeftHeader>
         
+          </div>
+            <div className={showSummary ? "dropDownElement" : "dropDownElement drop"} >
+            
+            
+              <article showSummary>{animeData.synopsis}</article>
+              </div>
+         <div>
       </div>
-      <div></div>
     </CardWrapper>
   );
 };
@@ -49,14 +53,16 @@ const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin: 1rem auto;
   background: transparent;
-  width: 100vw;
-
-  height: auto;
+  width: 63vw;
+  height: ${({ showSummary }) => showSummary && "fit-content"};
   z-index: 150;
 
   img {
     width: 8rem;
+    border-radius: 17px;
   }
 
   .card {
@@ -65,29 +71,39 @@ const CardWrapper = styled.div`
     align-items: flex-start;
     background-color: black;
     flex-direction: column;
+    background: rgba(0, 0, 0, 0.87);
     gap: 1rem;
     width: 55vw;
-    max-height: ${({ showSummary }) => (showSummary ? "fit-content" : "500px")};
     padding: 1rem;
     text-align: center;
-    border-radius:17px;
-    transition: max-height 1s ease-in-out;
-    animation: slideDown 1s 1;
+    border-radius: 17px;
   }
 
   .dropDownElement {
-    position: relative;
+    position: absolute;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    overflow: scroll;
-    width: 100%;
+    left: 49%;
+    top:4%;
+    bottom:15%;
+    max-width: 30%;
+    max-height: 85%;
+    height: fit-content;
+    text-align: center;
+    overflow-y: scroll !important;
     background: snow;
-    margin-top: 10px;
     text-overflow: clip;
     border-radius: 17px;
-    transition: max-height 1s ease-in-out;
     overflow: hidden;
+    animation:  slideDown 0.2s forwards;
+  }
+  .dropDownElement::-webkit-scrollbar {
+    display: none;
+  }
+  .dropDownElement.drop {
+    position: absolute;
+    animation: slideUp 2s forwards;
   }
 
   article {
@@ -100,11 +116,10 @@ const CardWrapper = styled.div`
     color: black;
     max-width: 80%;
     overflow: scroll;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     scrollbar-width: none;
-    transition: height 0.4s ease-out;
-    animation: ${({ showSummary }) =>
-      showSummary ? "slideDown .5s forwards" : "slideUp 1s forwards"};
+    transition: height 0.2s ease-out;
+    animation: ${({ showSummary }) => showSummary && "slideDown .5s forwards"};
   }
   article::-webkit-scrollbar {
     display: none;
@@ -112,19 +127,32 @@ const CardWrapper = styled.div`
 
   @keyframes slideDown {
     from {
-      transform: translateY(-100%);
+      transform: translateX(-150%);
+
+      width: 100%;
     }
     to {
-      transform: translateY(0);
+      transform: translateX(0);
+
+      width: 100%;
     }
   }
 
   @keyframes slideUp {
-    from {
-      transform: translateY(-100%);
+    0% {
+      transform: translateX(0);
     }
-    to {
-      transform: translateY(0);
+
+    100% {
+      transform: translateX(-1000%);
     }
   }
+`;
+const LeftHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 45%;
 `;

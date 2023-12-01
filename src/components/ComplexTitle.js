@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   h1 {
     font-family: "Roboto Flex", sans-serif;
     text-transform: capitalize;
+    color:white;
     text-align: center;
     font-size: 1.5rem;
   }
