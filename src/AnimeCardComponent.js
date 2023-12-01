@@ -28,10 +28,10 @@ const AnimeCardComponent = ({ animeData }) => {
               Show Summary
             </HipsterButton>
           )}
-            <div className="dropDownElement" showSummary={showSummary}>
-          {showSummary && (
-              <article>{animeData.synopsis}</article>
-              )}
+            <div className="dropDownElement" >
+            {showSummary &&
+              <article showSummary>{animeData.synopsis}</article>
+            }
               </div>
         </div>
       </div>
@@ -45,19 +45,24 @@ export default AnimeCardComponent;
 const CardWrapper = styled.div`
   position: relative;
   display: flex;
+  background-color: black;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: transparent;
   width: 100vw;
+  height: auto;
+  z-index: 150;
 
   img {
-    width: 7rem;
+    width: 8rem;
   }
 
   .card {
+    position: relative;
     display: flex;
     align-items: flex-start;
+    background-color: black;
     flex-direction: column;
     gap: 1rem;
     width: 55vw;
@@ -81,18 +86,18 @@ const CardWrapper = styled.div`
     background-color: whitesmoke;
     line-height: 1.3rem;
     color: black;
-    width: 50vw;
+    width: 100%;
     transition: height 0.4s ease-out;
     animation: ${({ showSummary }) =>
-      showSummary ? "slideDown 1s forwards" : "slideUp 1s forwards"};
+      showSummary ? "slideDown .5s forwards" : "slideUp 1s forwards"};
   }
 
   @keyframes slideDown {
     from {
-      transform: translateY(0);
+      transform: translateY(-100%);
     }
     to {
-      transform: translateY(-100%);
+      transform: translateY(0);
     }
   }
 
