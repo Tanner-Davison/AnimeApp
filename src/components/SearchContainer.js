@@ -28,6 +28,7 @@ position: relative;
 display:flex;
 justify-content: center;
 
+
 .searchInput{
     border-radius: 10px;
     width: 200px;

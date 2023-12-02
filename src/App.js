@@ -78,6 +78,7 @@ const Header = styled.div`
   justify-content: center;
   top: 0px;
   width: 50vw;
+  min-width:400px;
   height: auto;
   border-radius: 18px;
   margin: 1rem auto;
@@ -96,6 +97,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-  background-color: rgba(1111,1111, 1111, 0.3);
+  min-width: fit-content;
+  background-color: rgba(1111, 1111, 1111, 0.3);
   z-index: 1;
 `;

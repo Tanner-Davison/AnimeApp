@@ -20,7 +20,7 @@ export const DefaultButton = styled.button`
 export const HipsterButton = styled(DefaultButton)`
 background:transparent;
 color:#645cff;
-border: 1px solid #645cff;
+outline: 1px solid #645cff;
 &:hover{
   transform: scale(1.1)
 }
