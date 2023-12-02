@@ -8,48 +8,48 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
     const [ratedByUsers, setRatedByUsers]= useState(scoredBy !== null ? scoredBy.toLocaleString() : null);
    
     return (
-      <>
-        <Wrapper>
-          <h3>
-            {" "}
-            <div className={"scoreDiv"}>
-              <ComplexTitle
-                id={"title"}
-                animeScore={scoredBy}
-                title={"Anime Score"}
-              />
+			<>
+				<Wrapper >
+					<h3>
+						{" "}
+						<div className={"scoreDiv"}>
+							<ComplexTitle
+								id={"title"}
+								animeScore={scoredBy}
+								title={"Anime Score"}
+							/>
 
-              <span id={"number"}>
-                {" "}
-                {score} /<em id="ten">10</em>{" "}
-              </span>
-              <h5>
-                <div className={"scoredBy"}>
-                  <div id={"spanNum"}>
-                    <em>Rated By :</em>
-                    <em id={"numberBig"}>
-                      {scoredBy !== null ? ratedByUsers + " People" : "No One"}
-                    </em>
-                  </div>
-                </div>
-              </h5>
-            </div>
-          </h3>
-        </Wrapper>
-        <YoutubeWrapper>
-            {YtVideoUrl !== null && 
-          <iframe
-            title={YtVideoUrl}
-            width="400"
-            height="315"
-            id={'ytId'}
-            src={YtVideoUrl}
-            frameborder="1"
-            allowfullscreen></iframe>
-            }
-        </YoutubeWrapper>
-      </>
-    );
+							<span id={"number"}>
+								{" "}
+								{score} /<em id='ten'>10</em>{" "}
+							</span>
+							<h5>
+								<div className={"scoredBy"}>
+									<div id={"spanNum"}>
+										<em>Rated By :</em>
+										<em id={"numberBig"}>
+											{scoredBy !== null ? ratedByUsers + " People" : "No One"}
+										</em>
+									</div>
+								</div>
+							</h5>
+						</div>
+					</h3>
+				</Wrapper>
+				<YoutubeWrapper>
+					{YtVideoUrl !== null && (
+						<iframe
+							title={YtVideoUrl}
+							width='400'
+							height='315'
+							id={"ytId"}
+							src={YtVideoUrl}
+							frameBorder='1'
+							allowFullScreen></iframe>
+					)}
+				</YoutubeWrapper>
+			</>
+		);
 };
 
 export default RightComponent;
