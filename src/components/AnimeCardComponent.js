@@ -7,6 +7,9 @@ import RightComponent from "./RightComponent";
 import BottomInfo from "./BottomInfo";
 import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
+import CloseIcon from "@mui/icons-material/Close";
+
+
 const AnimeCardComponent = ({ animeData }) => {
 	const [showSummary, setShowSummary] = useState(false);
 
@@ -82,6 +85,9 @@ const AnimeCardComponent = ({ animeData }) => {
 										: "Synopsis not available for this title."}
 								</article>
 							</>
+							<CloseIcon
+								id={'close-icon'}
+								onClick={()=>setShowSummary(false) } />
 						</div>
 					</div>
 					<BottomInfo
@@ -173,14 +179,12 @@ const CardWrapper = styled.div`
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-		left: 24%;
-		top: 31%;
+		right: 0px;
 		font-size: 1.5rem;
-		bottom: 8%;
-		max-width: 74%;
-		max-height: 66%;
+		bottom: 1px;
+		width: 100%;
 		background-color: rgba(0, 0, 0, 0.9);
-		height: 66%;
+		height: 75%;
 		padding-bottom: 10px;
 		text-align: center;
 		overflow-y: scroll !important;
@@ -192,6 +196,20 @@ const CardWrapper = styled.div`
 		h3 {
 			color: white;
 			align-self: center;
+		}
+		#close-icon {
+			position: absolute;
+			top: 5px;
+			right: 15px;
+			border-radius: 50px;
+			box-sizing: border-box;
+			border: 2px solid red;
+			color: red;
+			transition: transform 0.2s ease-in-out;
+			cursor: pointer;
+		}
+		#close-icon:hover {
+			transform: scale(1.1);
 		}
 	}
 	.dropDownElement::-webkit-scrollbar {
@@ -251,7 +269,7 @@ const CardWrapper = styled.div`
 		}
 	}
 	@media screen and (max-width: 980px) {
-		min-width:84vw;
+		min-width: 84vw;
 		.card {
 			padding-bottom: 2.3rem;
 			min-width: 100%;
@@ -270,7 +288,7 @@ const CardWrapper = styled.div`
 			left: 1px;
 			min-width: 380px;
 			max-width: 98%;
-			height: 383px;
+			height: 422px;
 			bottom: 1px;
 		}
 	}

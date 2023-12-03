@@ -36,8 +36,8 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
 						</div>
 					</h3>
 				</Wrapper>
-				<YoutubeWrapper>
 					{YtVideoUrl !== null && (
+				<YoutubeWrapper>
 						<iframe
                             id={"ytId"}
 							title={YtVideoUrl}
@@ -46,8 +46,8 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
 							src={YtVideoUrl}
 							frameBorder={'1'}
 							allowFullScreen></iframe>
-					)}
 				</YoutubeWrapper>
+					)}
 			</>
 		);
 };
@@ -158,7 +158,7 @@ const YoutubeWrapper = styled.div`
   @media screen and (max-width: 980px) {
 	align-items: center;
 	justify-content: center;
-    margin-bottom:25px;
+    margin-bottom:50px;
     width:80%
   }
 `;
