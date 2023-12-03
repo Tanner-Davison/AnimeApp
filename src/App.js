@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
 import SearchContainer from "./components/SearchContainer";
@@ -8,6 +8,9 @@ import AnimeCardComponent from "./components/AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
 import OnePunchMan from "./components/imgs/OnePunchMan.jpg";
 import PageTurner from "./components/PageTurner";
+import FinalSaitama from './components/imgs/FinalSaitama.png';
+
+
 function App() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResult, setSearchResult] = useState("");
@@ -15,13 +18,7 @@ function App() {
   const [scrollFunc,setScrollFunc]=useState(false)
 
 	const [loading, setLoading] = useState(false);
-	useEffect(() => {
-    console.log(pageData);
-    if (scrollFunc) {
-      console.log('this is running working')
-      handleScroll()
-    }
-  }, [pageData]);
+	
   const handleScroll = () => {
     console.log('running')
     const element = document.getElementById('headerId')
@@ -51,47 +48,58 @@ function App() {
 		} else {
 			console.error("Search query is empty");
 		}
-	};
-
+  };
+  
+useEffect(() => {
+	console.log(pageData);
+	if (scrollFunc) {
+		console.log("this is running working");
+		handleScroll();
+	}
+}, [pageData]);
 	return (
 		<>
-			<Wrapper>
-				<HeaderWrapper>
-					<Header id={'headerId'} className={"header"}>
-						<BasicTitle>Search For Any Anime </BasicTitle>
-						<SearchContainer
-							searchQuery={searchQuery}
-							onSearch={() => handleSearch()}
-							onQueryChange={(query) => setSearchQuery(query)}
-							loading={loading}
-						/>
-					</Header>
-				</HeaderWrapper>
-
-				{searchResult !== "" &&
-					searchResult.map((result) => {
-						return (
-							<AnimeCardComponent
-								key={result.mal_id}
-                animeData={result}
-                scrollToTop={handleScroll}
-                setScrollFunc={setScrollFunc}
-                scrollFunc={scrollFunc}
+			<ThemeProvider theme={DarkTheme}>
+				<Wrapper>
+					<HeaderWrapper>
+						<Header
+							id={"headerId"}
+							className={"header"}>
+							<BasicTitle>Search For Any Anime </BasicTitle>
+							<SearchContainer
+								searchQuery={searchQuery}
+								onSearch={() => handleSearch()}
+								onQueryChange={(query) => setSearchQuery(query)}
+								loading={loading}
 							/>
-						);
-					})}
-				<PageTurner
-					pageData={pageData}
-					handleSearch={handleSearch}
-					searchQuery={searchQuery}
-					onNextPage={() => {
-						handleSearch(pageData.current_page + 1);
-          }}
-          setScrollFunc={setScrollFunc}
-					onPrevPage={() => {
-						handleSearch(pageData.current_page - 1);
-					}}></PageTurner>
-			</Wrapper>
+						</Header>
+					</HeaderWrapper>
+
+					{searchResult !== "" &&
+						searchResult.map((result) => {
+							return (
+								<AnimeCardComponent
+									key={result.mal_id}
+									animeData={result}
+									scrollToTop={handleScroll}
+									setScrollFunc={setScrollFunc}
+									scrollFunc={scrollFunc}
+								/>
+							);
+						})}
+					<PageTurner
+						pageData={pageData}
+						handleSearch={handleSearch}
+						searchQuery={searchQuery}
+						onNextPage={() => {
+							handleSearch(pageData.current_page + 1);
+						}}
+						setScrollFunc={setScrollFunc}
+						onPrevPage={() => {
+							handleSearch(pageData.current_page - 1);
+						}}></PageTurner>
+				</Wrapper>
+			</ThemeProvider>
 		</>
 	);
 }
