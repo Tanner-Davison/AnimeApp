@@ -6,7 +6,7 @@ import { HipsterButton, DefaultButton } from "./Buttons";
 import RightComponent from "./RightComponent";
 import BottomInfo from "./BottomInfo";
 import getForumData from "../API/getForumData";
-
+import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 const AnimeCardComponent = ({ animeData }) => {
 	const [showSummary, setShowSummary] = useState(false);
 
@@ -15,10 +15,10 @@ const AnimeCardComponent = ({ animeData }) => {
 	const score = animeData.score;
 	const scoredBy = animeData.scored_by;
 	const tvType = animeData.type;
-	const ReleasedYear = animeData.year;
+	const releasedYear = animeData.year;
 	const rating = animeData.rating;
 	const episodes =
-		animeData.episodes !== null ? animeData.episodes : "Movie/NoEpisodes";
+		tvType === 'TV' || 'Special'  && tvType !== null  ?  animeData.episodes : "N/A";
 	const YtVideoUrl = animeData.trailer.embed_url;
 
 	return (
@@ -68,7 +68,14 @@ const AnimeCardComponent = ({ animeData }) => {
 								showSummary ? "dropDownElement" : "dropDownElement drop"
 							}>
 							<>
-								<h3>Synopsis</h3>
+								<div className={"flex"}>
+									<img
+										id={"synopsisImg"}
+										src={saitamaFaceOnly}
+										alt={"saitamaface"}
+									/>
+									<h3>Synopsis</h3>
+								</div>
 								<article showSummary>
 									{animeData.synopsis !== null
 										? animeData.synopsis
@@ -77,15 +84,16 @@ const AnimeCardComponent = ({ animeData }) => {
 							</>
 						</div>
 					</div>
+					<BottomInfo
+						key={animeData.mal_id}
+						tvType={tvType}
+						releasedYear={releasedYear}
+						rating={rating}
+						episodes={episodes}>
+						{" "}
+					</BottomInfo>
 				</div>
 
-				<BottomInfo
-					key={animeData.mal_id}
-					tvType={tvType}
-					ReleasedYear={ReleasedYear}
-					rating={rating}>
-					{" "}
-				</BottomInfo>
 				<DefaultButton onClick={() => getForumData(animeData.mal_id)}>
 					View Forum
 				</DefaultButton>
@@ -99,17 +107,28 @@ export default AnimeCardComponent;
 const CardWrapper = styled.div`
 	position: relative;
 	display: flex;
-	background-color: black;
 	flex-direction: column;
+	min-width: fit-content;
 	align-items: center;
 	justify-content: center;
-	gap: 1rem;
+	gap: 0.25rem;
 	margin: 1rem auto;
 	background: transparent;
 	width: 63vw;
-	height: ${({ showSummary }) => showSummary && "fit-content"};
-	z-index: 1;
 
+	z-index: 1;
+	.flex {
+		display: flex;
+		flex-direction: row;
+		padding: 5px;
+		align-items: center;
+		justify-content: center;
+	}
+	#synopsisImg {
+		width: 112px;
+		margin-right: -20px;
+		height: 86px;
+	}
 	#creative {
 		position: relative;
 		width: fit-content;
@@ -124,16 +143,16 @@ const CardWrapper = styled.div`
 		position: relative;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		background-color: black;
 		min-height: 426px;
-		min-width: 351px;
+		min-width: fit-content;
 		flex-direction: column;
 		background: rgba(0, 0, 0, 0.87);
-		gap: 1rem;
+		gap: 0.025rem;
 		width: 55vw;
 		color: white;
-		justify-content: center;
-		padding: 1rem;
+		padding: 1rem 2rem;
 		text-align: center;
 		border-radius: 17px;
 		z-index: 1;
@@ -142,6 +161,8 @@ const CardWrapper = styled.div`
 		display: flex;
 		flex-direction: row;
 		width: 100%;
+		margin: 10px;
+		gap: 10px;
 		align-items: center;
 		justify-content: space-around;
 	}
@@ -152,12 +173,13 @@ const CardWrapper = styled.div`
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-		left: 37%;
-		top: 32%;
+		left: 24%;
+		top: 31%;
+		font-size: 1.5rem;
 		bottom: 8%;
-		max-width: 59%;
+		max-width: 74%;
 		max-height: 66%;
-		background-color: rgba(0, 0, 0, 0.8);
+		background-color: rgba(0, 0, 0, 0.9);
 		height: 66%;
 		padding-bottom: 10px;
 		text-align: center;
@@ -189,7 +211,7 @@ const CardWrapper = styled.div`
 		padding: 2rem 1rem;
 		font-family: "Archivo", sans-serif;
 		background-color: snow;
-		line-height: 1.5rem;
+		line-height: 1.9rem;
 
 		color: whitesmoke;
 		max-width: 80%;
@@ -222,17 +244,22 @@ const CardWrapper = styled.div`
 	@keyframes slideUp {
 		0% {
 			transform: translateX(0);
-			z-index: -2;
 		}
 
 		100% {
 			transform: translateX(-1000%);
-			z-index: -2;
 		}
 	}
 	@media screen and (max-width: 980px) {
+		min-width:84vw;
+		.card {
+			padding-bottom: 2.3rem;
+			min-width: 100%;
+		}
 		.card-content {
 			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			gap: 5%;
 			height: fit-content;
 			padding-bottom: 10px;
@@ -243,7 +270,7 @@ const CardWrapper = styled.div`
 			left: 1px;
 			min-width: 380px;
 			max-width: 98%;
-			height: 300px;
+			height: 383px;
 			bottom: 1px;
 		}
 	}
@@ -252,7 +279,7 @@ const LeftHeader = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	flex-direction: column;
 	height: 100%;
 	gap: 25px;
@@ -276,7 +303,8 @@ const LeftHeader = styled.div`
 
 	@media screen and (max-width: 980px) {
 		img {
-			width: 7.5rem;
+			width: 12.5rem;
+			margin-top: 1.2rem;
 		}
 	}
 `;
