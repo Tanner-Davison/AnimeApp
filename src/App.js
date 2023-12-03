@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
@@ -7,18 +7,42 @@ import SearchContainer from "./components/SearchContainer";
 import AnimeCardComponent from "./components/AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
 import OnePunchMan from "./components/imgs/OnePunchMan.jpg";
-
+import PageTurner from "./components/PageTurner";
 function App() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResult, setSearchResult] = useState("");
-	const [loading, setLoading] = useState(false);
+  const [pageData, setPageData] = useState("");
+  const [scrollFunc,setScrollFunc]=useState(false)
 
-	const handleSearch = async () => {
+	const [loading, setLoading] = useState(false);
+	useEffect(() => {
+    console.log(pageData);
+    if (scrollFunc) {
+      console.log('this is running working')
+      handleScroll()
+    }
+  }, [pageData]);
+  const handleScroll = () => {
+    console.log('running')
+    const element = document.getElementById('headerId')
+      element.scrollIntoView({
+				behavior: "smooth",
+				block: "start", 
+			});
+    
+  }
+  const handleSearch = async (pageOption) => {
+    setScrollFunc(true)
+		let pageQuery = null;
+		if (pageOption) {
+			pageQuery = pageOption;
+		}
 		if (searchQuery.trim() !== "") {
 			setLoading(true);
 			try {
-				const searchData = await getSearchData(searchQuery);
-				setSearchResult(searchData);
+				const searchData = await getSearchData({ searchQuery, pageQuery });
+				setSearchResult(searchData.response);
+				setPageData(searchData.pageData);
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			} finally {
@@ -30,29 +54,45 @@ function App() {
 	};
 
 	return (
-		<Wrapper>
-			<HeaderWrapper>
-				<Header className={"header"}>
-					<BasicTitle>Search For Any Anime </BasicTitle>
-					<SearchContainer
-						searchQuery={searchQuery}
-						onSearch={() => handleSearch()}
-						onQueryChange={(query) => setSearchQuery(query)}
-						loading={loading}
-					/>
-				</Header>
-			</HeaderWrapper>
-
-			{searchResult !== "" &&
-				searchResult.map((result) => {
-					return (
-						<AnimeCardComponent
-							key={result.mal_id}
-              animeData={result}
+		<>
+			<Wrapper>
+				<HeaderWrapper>
+					<Header id={'headerId'} className={"header"}>
+						<BasicTitle>Search For Any Anime </BasicTitle>
+						<SearchContainer
+							searchQuery={searchQuery}
+							onSearch={() => handleSearch()}
+							onQueryChange={(query) => setSearchQuery(query)}
+							loading={loading}
 						/>
-					);
-				})}
-		</Wrapper>
+					</Header>
+				</HeaderWrapper>
+
+				{searchResult !== "" &&
+					searchResult.map((result) => {
+						return (
+							<AnimeCardComponent
+								key={result.mal_id}
+                animeData={result}
+                scrollToTop={handleScroll}
+                setScrollFunc={setScrollFunc}
+                scrollFunc={scrollFunc}
+							/>
+						);
+					})}
+				<PageTurner
+					pageData={pageData}
+					handleSearch={handleSearch}
+					searchQuery={searchQuery}
+					onNextPage={() => {
+						handleSearch(pageData.current_page + 1);
+          }}
+          setScrollFunc={setScrollFunc}
+					onPrevPage={() => {
+						handleSearch(pageData.current_page - 1);
+					}}></PageTurner>
+			</Wrapper>
+		</>
 	);
 }
 

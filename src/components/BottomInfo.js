@@ -13,8 +13,8 @@ const BottomInfo = ({tvType, episodes, rating}) => {
 			<div
 				className={"bottom-info-elements"}
 				id={"episodes"}>
-        	<h2> # of Episodes </h2>
-				<p>{episodes}</p>
+        	<h2> Episodes </h2>
+				<p id={'episodeNumWrapper'}>{episodes}</p>
 			</div>
 			<div
 				className={"bottom-info-elements"}
@@ -59,6 +59,12 @@ h2{
 p{
   font-size:1.3rem;
   color:white;
+}
+#episodeNumWrapper{
+	border-radius: 50px;
+	box-sizing: border-box;
+	border:2px solid white;
+	padding:.2rem .5rem;
 }
 @media screen and (max-width: 980px) {
   

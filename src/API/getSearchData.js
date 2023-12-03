@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const getSearchData = async (params) =>{
+const getSearchData = async ({searchQuery:params, pageQuery}) =>{
  console.log(typeof params)
  const options = {
    method: "GET",
@@ -9,13 +9,13 @@ const getSearchData = async (params) =>{
    params: {
      q: `${params}`,
      limit: 25,
+     page: `${pageQuery !== null ? pageQuery : 1}`,
      
    },
  };
    try {
      const response = await axios.request(options);
-     console.log(response.data)
-     return response.data.data;
+     return { response: response.data.data, pageData: response.data.pagination };
    } catch (err) {
      console.log(err);
    }

@@ -10,9 +10,9 @@ import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-const AnimeCardComponent = ({ animeData }) => {
+const AnimeCardComponent = ({ animeData,scrollToTop, setScrollFunc,scrollFunc }) => {
 	const [showSummary, setShowSummary] = useState(false);
-
+	
 	const title = animeData.title_english || animeData.title;
 	const animeImg = animeData.images.jpg.image_url;
 	const score = animeData.score;
@@ -24,6 +24,7 @@ const AnimeCardComponent = ({ animeData }) => {
 		tvType === 'TV' || 'Special'  && tvType !== null  ?  animeData.episodes : "N/A";
 	const YtVideoUrl = animeData.trailer.embed_url;
 
+  
 	return (
 		<>
 			<CardWrapper
