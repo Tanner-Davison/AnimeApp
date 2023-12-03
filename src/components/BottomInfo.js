@@ -36,6 +36,7 @@ align-items: center;
 justify-content:space-between;
 font-family: Archivo;
 text-align: center;
+margin-bottom:20px;
 .bottom-info-elements{
   display:flex;
   flex-direction: column;
