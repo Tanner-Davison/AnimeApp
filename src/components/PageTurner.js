@@ -11,34 +11,37 @@ const PageTurner = ({
 	setScrollFunc,
 }) => {
 	const [pageQuery, setPageQuery] = useState(null);
+	const [pages, setPages]= useState([]);
 	const currentPage = pageData.current_page;
 	const nextPage = pageData.has_next_page;
 	const lastPage = pageData.last_visible_page;
-
+	const getAllPageNums = () =>{
+		if(lastPage >2){
+			for(let i=0; i<lastPage; i++){
+				setPages(i);
+			}
+			console.log(pages)
+		}
+	}
 	return (
-		<Wrapper>
-			<>
-				{currentPage > 1 && (
-					<div id={"flex-row"}>
-						<NavigateBeforeIcon
-							id={"iconId"}
-							onClick={onPrevPage}
-						/>
-						<p>Last Page</p>
-					</div>
-				)}
-				{nextPage && (
-					<div id={"flex-row"}>
-						<p>Next Page</p>
-						<NavigateNextIcon
-							id={"iconId"}
-							onClick={onNextPage}
-						/>
-					</div>
-				)}
-			</>
-		</Wrapper>
-	);
+    <Wrapper id={"bottomElement"}>
+      <>
+        {currentPage > 1 && (
+          <div id={"flex-row"}>
+            <NavigateBeforeIcon id={"iconId"} onClick={onPrevPage} />
+            <p>Last Page</p>
+          </div>
+        )}
+        {nextPage && (
+          <div id={"flex-row"}>
+            <p>Next Page</p>
+            <NavigateNextIcon id={"iconId"} onClick={onNextPage} />
+          </div>
+        )}
+        <button onClick={getAllPageNums}>Click me</button>
+      </>
+    </Wrapper>
+  );
 };
 
 export default PageTurner;
@@ -55,7 +58,7 @@ const Wrapper = styled.div`
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		color: white;
+		color: snow;
 		font-family: Archivo;
 		box-sizing: border-box;
 		cursor: pointer;
