@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useState } from "react";
 import React from "react";
 import ComplexTitle from "./ComplexTitle";
@@ -9,10 +9,14 @@ import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 
-
-const AnimeCardComponent = ({ animeData,scrollToTop, setScrollFunc,scrollFunc }) => {
+const AnimeCardComponent = ({
+	animeData,
+	scrollToTop,
+	setScrollFunc,
+	scrollFunc,
+}) => {
 	const [showSummary, setShowSummary] = useState(false);
-	
+
 	const title = animeData.title_english || animeData.title;
 	const animeImg = animeData.images.jpg.image_url;
 	const score = animeData.score;
@@ -21,10 +25,11 @@ const AnimeCardComponent = ({ animeData,scrollToTop, setScrollFunc,scrollFunc })
 	const releasedYear = animeData.year;
 	const rating = animeData.rating;
 	const episodes =
-		tvType === 'TV' || 'Special'  && tvType !== null  ?  animeData.episodes : "N/A";
+		tvType === "TV" || ("Special" && tvType !== null)
+			? animeData.episodes
+			: "N/A";
 	const YtVideoUrl = animeData.trailer.embed_url;
 
-  
 	return (
 		<>
 			<CardWrapper
@@ -87,8 +92,9 @@ const AnimeCardComponent = ({ animeData,scrollToTop, setScrollFunc,scrollFunc })
 								</article>
 							</>
 							<CloseIcon
-								id={'close-icon'}
-								onClick={()=>setShowSummary(false) } />
+								id={"close-icon"}
+								onClick={() => setShowSummary(false)}
+							/>
 						</div>
 					</div>
 					<BottomInfo
@@ -121,7 +127,7 @@ const CardWrapper = styled.div`
 	gap: 0.25rem;
 	margin: 1rem auto;
 	background: transparent;
-	width: 63vw;
+	width: 73vw;
 
 	z-index: 1;
 	.flex {
@@ -157,7 +163,7 @@ const CardWrapper = styled.div`
 		flex-direction: column;
 		background: rgba(0, 0, 0, 0.87);
 		gap: 0.025rem;
-		width: 55vw;
+		width: 100%;
 		color: white;
 		padding: 1rem 2rem;
 		text-align: center;
@@ -191,7 +197,7 @@ const CardWrapper = styled.div`
 		overflow-y: scroll !important;
 		text-overflow: clip;
 		border-radius: 17px;
-		overflow: hidden;
+
 		animation: slideDown 0.6s forwards;
 		z-index: 4;
 		h3 {
@@ -213,11 +219,7 @@ const CardWrapper = styled.div`
 			transform: scale(1.1);
 		}
 	}
-	.dropDownElement::-webkit-scrollbar {
-		display: none;
-		background-color: rgba(0, 0, 0, 0.87);
-		z-index: -2;
-	}
+
 	.dropDownElement.drop {
 		position: absolute;
 		animation: slideUp 2s forwards;
@@ -236,17 +238,11 @@ const CardWrapper = styled.div`
 		max-width: 80%;
 		background-color: rgba(0, 0, 0, 0.4);
 		overflow: scroll;
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+
 		transition: height 0.2s ease-out;
-		animation: ${({ showSummary }) => showSummary && "slideDown .8s forwards"};
+		animation: ${({ showSummary }) => showSummary && `slideDown .8s forwards`};
 		z-index: -2;
 	}
-
-	article::-webkit-scrollbar {
-		display: none;
-	}
-
 	@keyframes slideDown {
 		from {
 			transform: translateX(-300%);
@@ -270,10 +266,22 @@ const CardWrapper = styled.div`
 		}
 	}
 	@media screen and (max-width: 980px) {
-		min-width: 84vw;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-width: fit-content;
+		align-items: center;
+		justify-content: center;
+		gap: 0.25rem;
+		margin: 1rem 45px;
+		background: transparent;
+		width: 70vw;
+		z-index: 1;
 		.card {
 			padding-bottom: 2.3rem;
-			min-width: 100%;
+			min-width: 50%;
+			width: 90%;
+			margin-right: 25px;
 		}
 		.card-content {
 			flex-direction: column;

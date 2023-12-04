@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider,keyframes } from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
 import SearchContainer from "./components/SearchContainer";
@@ -11,6 +11,7 @@ import PageTurner from "./components/PageTurner";
 import FinalSaitama from './components/imgs/FinalSaitama.png';
 import onePunchManPointingUp from './components/imgs/onePunchManPointingUp.jpg';
 import onePunchPointingDown from './components/imgs/onePunchPointingDown.png';
+import saitamaHanging from './components/imgs/saitamaHanging.png';
 
 const DarkTheme={
   color: 'white',
@@ -62,7 +63,7 @@ function App() {
 			console.error("Search query is empty");
 		}
   };
-
+ 
 useEffect(() => {
 	console.log(pageData);
 	if (scrollFunc===true) {
@@ -108,6 +109,7 @@ useEffect(() => {
               handleSearch(pageData.current_page + 1);
             }}
             setScrollFunc={setScrollFunc}
+            onPageClick={handleSearch}
             onPrevPage={() => {
               handleSearch(pageData.current_page - 1);
             }}></PageTurner>
@@ -151,14 +153,42 @@ const Wrapper = styled.div`
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
-	border: 5px solid red;
+align-items: center;
 	width: 99vw;
 	background-image: url(${OnePunchMan});
 	background-repeat: no-repeat;
 	background-size: cover;
 	z-index: 139;
 	&::-webkit-scrollbar {
-		display: none;
+    position: relative;
+    width:60px;
+    overflow: visible;
+	}
+
+	/* background of the scrollbar except button or resizer */
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+    height: 100px;
+	}
+
+	/* scrollbar itself */
+	&::-webkit-scrollbar-thumb {
+    
+		height: 100px;
+		background-color: transparent;
+		background-image: url(${saitamaHanging}) !important;
+		background-size: contain;
+		background-position: end;
+		background-size: 100%;
+		background-repeat: no-repeat;
+		border-radius: 16px;
+	}
+	@media screen and (max-width: 980px) {
+		&::-webkit-scrollbar {
+     position: absolute;
+			width: 30px;
+			
+		}
 	}
 `;
 const Header = styled.div`
@@ -193,49 +223,61 @@ const HeaderWrapper = styled.div`
 	z-index: 1;
 `;
 const NavPageUp = styled.div`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  width: 100px;
-  align-items: center;
-  justify-content: center;
-  top: 0px;
-  left: 0px;
-  background: transparent;
-  z-index: 150;
-  p {
-    font-family: Archivo;
-    font-size: 1em;
-    margin: 0px;
-  }
-  .pageGuides {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-    color: white;
-    width: 100px;
-    padding: 10px;
-    border-radius: 50px;
-    border-top-left-radius: 0px;
-    background-color: rgba(0, 0, 0, 0.7);
-    box-sizing: border-box;
-    border: 3px solid snow;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    overflow: hidden;
-  }
-  .pageGuides:hover {
-    transform: scale(1.1);
-  }
-  #pointing-up {
-    position: relative;
-    height: 80px;
-    width: 80px;
-  }
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	width: 100px;
+	align-items: center;
+	justify-content: center;
+	top: 0px;
+	left: 0px;
+	background: transparent;
+	z-index: 150;
+	p {
+		font-family: Archivo;
+		font-size: 1em;
+		margin: 0px;
+	}
+	.pageGuides {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		border: none;
+		color: white;
+		width: 100px;
+		padding: 10px;
+		border-radius: 50px;
+		border-top-left-radius: 0px;
+		background-color: rgba(0, 0, 0, 0.7);
+		box-sizing: border-box;
+		border: 3px solid snow;
+		cursor: pointer;
+		transition: transform 0.2s ease-in-out;
+		overflow: hidden;
+	}
+	.pageGuides:hover {
+		transform: scale(1.1);
+	}
+	#pointing-up {
+		position: relative;
+		height: 80px;
+		width: 80px;
+	}
+	@media screen and (max-width: 980px) {
+    width:unset;
+    .pageGuides {
+      width:55px;
+      left: 0px;;
+    }
+		#pointing-up {
+			position: relative;
+			height: 40px;
+			width: 40px;
+		}
+	}
 `;
 const NavPageDown = styled.div`
   position: fixed;
@@ -265,7 +307,7 @@ const NavPageDown = styled.div`
     color: white;
     width:100px;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 18px;
     border-bottom-left-radius: 0px;
     background-color: rgba(0, 0, 0, 0.7);
     box-sizing: border-box;
@@ -284,4 +326,17 @@ const NavPageDown = styled.div`
     height: 80px;
     width: 110px;
   }
+  	@media screen and (max-width: 980px) {
+ width:unset;
+    .pageGuides {
+      width:55px;
+      left: 0px;;
+    }
+		#pointing-down {
+			position: relative;
+			height: 40px;
+			width: 50px;
+		}
+	}
+    
 `;
