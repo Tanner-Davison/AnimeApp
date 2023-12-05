@@ -147,6 +147,7 @@ const CardWrapper = styled.div`
 		width: fit-content;
 		justify-self: flex-end;
 		color: white;
+		width: 50%;
 		font-size: 32px;
 		background-color: black;
 		border-radius: 17px;
@@ -276,12 +277,12 @@ const CardWrapper = styled.div`
 		margin: 1rem 45px;
 		background: transparent;
 		width: 70vw;
+		
 		z-index: 1;
 		.card {
 			padding-bottom: 2.3rem;
 			min-width: 50%;
-			width: 90%;
-			margin-right: 25px;
+			width: 100%;
 		}
 		.card-content {
 			flex-direction: column;
@@ -299,6 +300,11 @@ const CardWrapper = styled.div`
 			max-width: 98%;
 			height: 422px;
 			bottom: 1px;
+		}
+		#creative {
+			width: unset;
+			font-size: 1rem;
+			word-break: break-all;
 		}
 	}
 `;

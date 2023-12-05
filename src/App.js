@@ -153,7 +153,7 @@ const Wrapper = styled.div`
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
-align-items: center;
+  align-items: center;
 	width: 99vw;
 	background-image: url(${OnePunchMan});
 	background-repeat: no-repeat;
@@ -165,7 +165,6 @@ align-items: center;
     overflow: visible;
 	}
 
-	/* background of the scrollbar except button or resizer */
 	&::-webkit-scrollbar-track {
 		background-color: transparent;
     height: 100px;
