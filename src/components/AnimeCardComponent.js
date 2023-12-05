@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { useState } from "react";
 import React from "react";
-import ComplexTitle from "./ComplexTitle";
 import { HipsterButton, DefaultButton } from "./Buttons";
 import RightComponent from "./RightComponent";
 import BottomInfo from "./BottomInfo";
@@ -11,9 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const AnimeCardComponent = ({
 	animeData,
-	scrollToTop,
-	setScrollFunc,
-	scrollFunc,
+	
 }) => {
 	const [showSummary, setShowSummary] = useState(false);
 
@@ -70,7 +67,7 @@ const AnimeCardComponent = ({
 							episodes={episodes}
 							score={score}
 							scoredBy={scoredBy}></RightComponent>
-
+					{showSummary && 
 						<div
 							key={animeData.mal_id + 34322}
 							className={
@@ -96,6 +93,7 @@ const AnimeCardComponent = ({
 								onClick={() => setShowSummary(false)}
 							/>
 						</div>
+									}
 					</div>
 					<BottomInfo
 						key={animeData.mal_id}

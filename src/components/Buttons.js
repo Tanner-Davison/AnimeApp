@@ -34,7 +34,6 @@ export const ArrowButton = styled.div`
   justify-content: center;
 	width: 24px;
   min-height: 300px;
-  
   bottom:50%;
   left:0px;
   color:white;
@@ -47,6 +46,7 @@ export const ArrowButton = styled.div`
   cursor: pointer;
   transition:  .4s ease-out;
   &:hover{
+    cursor: unset;
     position: sticky;
     width: 190px;
   

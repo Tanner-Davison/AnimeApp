@@ -183,7 +183,6 @@ function App() {
 export default App;
 const Wrapper = styled.div`
 	position: relative;
-
 	height: 99vh;
 	overflow: scroll;
 	overflow-x: hidden;
@@ -306,6 +305,14 @@ const NavPage = styled.div`
 		cursor: pointer;
 		transition: transform 0.2s ease-in-out;
 		overflow: hidden;
+		animation: slideInFromLeft .7s 1 ;
+		@keyframes slideInFromLeft {
+			from{
+				transform: translateX(-300%);
+			}to{
+				transform: translateX(0);
+			}
+		}
 	}
 
 	.pageGuides:hover {
