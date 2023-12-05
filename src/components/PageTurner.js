@@ -7,8 +7,8 @@ const PageTurner = ({
 	pageData,
 	searchQuery,
 	onNextPage,
-    onPrevPage,
-    handleSearch,
+	onPrevPage,
+	handleSearch,
 	setScrollFunc,
 }) => {
 	const [pageQuery, setPageQuery] = useState(null);
@@ -16,6 +16,7 @@ const PageTurner = ({
 	const currentPage = pageData.current_page;
 	const nextPage = pageData.has_next_page;
 	const lastPage = pageData.last_visible_page;
+	const [openNav, setOpenNav] = useState(false);
 
 	const getAllPageNums = () => {
 		if (lastPage > 2) {
@@ -31,9 +32,9 @@ const PageTurner = ({
 		getAllPageNums();
 	}, [pageData]);
 	return (
-		<Wrapper id={"bottomElement"}>
+		<Wrapper >
 			<>
-				{currentPage > 1 && (
+				{currentPage > 1 &&  (
 					<div id={"flex-row"}>
 						<NavigateBeforeIcon
 							id={"iconId"}
@@ -42,15 +43,15 @@ const PageTurner = ({
 						<p>Page {currentPage - 1} </p>
 					</div>
 				)}
-				{lastPage > 2 && (
+				{lastPage > 2 && openNav && (
 					<div className={"pages"}>
 						{pages.map((page) => {
 							return (
 								<button
 									id={"page-button"}
-                                    key={page}
-                                    value={page}
-                                    onClick={()=>handleSearch(page)}>
+									key={page}
+									value={page}
+									onClick={() => handleSearch(page)}>
 									{page + 1}
 								</button>
 							);
@@ -61,8 +62,7 @@ const PageTurner = ({
 					<div className={"pages"}>
 						<button
 							key={currentPage}
-                            id={"page-button"}
-                            >
+							id={"page-button"}>
 							<p>
 								Page {currentPage} of {lastPage}{" "}
 							</p>{" "}
@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 	align-self: center;
 	width: 50vw;
 	gap: 15%;
-    overflow-y:visible;
+	overflow-y: visible;
 	#flex-row {
 		display: flex;
 		flex-direction: row;
@@ -113,35 +113,33 @@ const Wrapper = styled.div`
 	.pages {
 		position: relative;
 		display: flex;
-        align-items: center;
-        justify-content: center;
+		align-items: center;
+		justify-content: center;
 		max-width: 50%;
 		width: 100%;
-        height: 100%;
+		height: 100%;
 		padding: 1rem auto;
 		gap: 15px;
 		overflow-x: scroll;
-        overflow-y:visible;
-        
-        
+		overflow-y: visible;
 	}
 	#page-button {
-        box-sizing: border-box;
+		box-sizing: border-box;
 		border: 2px solid white;
 		font-family: Archivo;
 		border-radius: 18px;
-        width:auto;
-        height:52%;
+		width: auto;
+		height: 52%;
 		font-size: 1.5em;
 		background-color: #645cff;
 		color: white;
 	}
-    #page-button:hover{
-        transform:scale(1.1)
-    }
+	#page-button:hover {
+		transform: scale(1.1);
+	}
 	p {
 		font-family: Archivo;
-        text-wrap:nowrap;
+		text-wrap: nowrap;
 		color: white;
 		margin: 0;
 		text-align: center;

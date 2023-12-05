@@ -128,8 +128,8 @@ const CardWrapper = styled.div`
 	margin: 1rem auto;
 	background: transparent;
 	width: 73vw;
-
 	z-index: 1;
+
 	.flex {
 		display: flex;
 		flex-direction: row;
@@ -198,9 +198,9 @@ const CardWrapper = styled.div`
 		overflow-y: scroll !important;
 		text-overflow: clip;
 		border-radius: 17px;
-
 		animation: slideDown 0.6s forwards;
 		z-index: 4;
+
 		h3 {
 			color: white;
 			align-self: center;
@@ -277,7 +277,7 @@ const CardWrapper = styled.div`
 		margin: 1rem 45px;
 		background: transparent;
 		width: 70vw;
-		
+
 		z-index: 1;
 		.card {
 			padding-bottom: 2.3rem;
