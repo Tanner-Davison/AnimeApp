@@ -15,7 +15,7 @@ import { ArrowButton } from "./components/Buttons";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import standingSaitama from "./components/imgs/standingSaitama.webp";
 import smallOnePunch from "./components/imgs/smallOnePunch.png";
-import SettingsTool from "./components/SettingsTool";
+
 const DarkTheme = {
   color: "white",
 };
@@ -38,6 +38,9 @@ function App() {
       block: "start",
     });
   };
+  const handleSettingsClick = () =>{
+    return setIsColorToolOpen(!isColorToolOpen)
+  }
   const handleColorChange = (color) => {
     setPickedColor(color);
   };
@@ -95,18 +98,18 @@ function App() {
       <ThemeProvider theme={DarkTheme}>
         <Wrapper pickedColor={pickedColor}>
           <HeaderWrapper>
-            {isColorToolOpen && (
-              <ColorPickerComponent onColorChange={handleColorChange} />
-            )}
-
             <Header id={"headerId"} className={"header"}>
               <BasicTitle>Search For Any Anime </BasicTitle>
               <SearchContainer
                 searchQuery={searchQuery}
                 onSearch={() => handleSearch()}
                 onQueryChange={(query) => setSearchQuery(query)}
+                onSettingsClick={handleSettingsClick}
                 loading={loading}
               />
+              {isColorToolOpen && (
+                <ColorPickerComponent onColorChange={handleColorChange} onSettingsClick={handleSettingsClick}/>
+              )}
             </Header>
           </HeaderWrapper>
 
@@ -197,7 +200,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 99vw;
   background-image: url(${standingSaitama}), url(${smallOnePunch});
-  background: url(${standingSaitama}) left top, url(${smallOnePunch}) right top;
+  background: url(${standingSaitama}) left top 20px,
+    url(${smallOnePunch}) right top ;
   background-repeat: no-repeat;
   background-size: contain;
   background-color: ${({ pickedColor }) =>
@@ -276,7 +280,7 @@ const HeaderWrapper = styled.div`
   border-radius: 29px;
   min-width: fit-content;
   background-color: rgb(39 38 39 / 80%);
-  z-index: 1;
+  z-index: 200;
   animation: slideRight 0.5s linear backwards;
 
   @keyframes slideRight {

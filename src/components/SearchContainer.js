@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-
-const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading }) => {
+import SettingsTool from "./SettingsTool";
+const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick }) => {
   return (
+    <>
     <SearchDiv>
       <StyledInput
         type="text"
@@ -14,7 +15,9 @@ const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading }) => {
       <Button color="primary" variant="contained" onClick={onSearch}>
         Search
       </Button>
+    <SettingsTool id={'settingsTool'} onSettingsClick={onSettingsClick}/>
     </SearchDiv>
+    </>
   );
 };
 
@@ -24,6 +27,7 @@ const SearchDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  
 `;
 
 const StyledInput = styled.input`

@@ -1,9 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import SaitamasFace from './imgs/SaitamasFace.webp';
-import saitamasFace2 from './imgs/saitamasFace2.png';
-import FinalSaitama from './imgs/FinalSaitama.png';
-import saitamaFaceOnly  from './imgs/saitamaFaceOnly.png';
 import saitamaAndFriends from './imgs/saitamaAndFriends.png';
 const ComplexTitle = ({title, animeScore}) => {
   
