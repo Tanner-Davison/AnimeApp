@@ -46,10 +46,10 @@ const StyledInput = styled.input`
   }
 
   @media screen and (max-width: 980px) {
-    width: 150px;
+    width: 100px;
 
     &:focus {
-      width: 200px;
+      width: 150px;
     }
   }
 `;

@@ -190,67 +190,69 @@ function App() {
 
 export default App;
 const Wrapper = styled.div`
-  position: relative;
-  height: 99vh;
-  overflow: scroll;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 99vw;
-  background-image: url(${standingSaitama}), url(${smallOnePunch});
-  background: url(${standingSaitama}) left top 20px,
-    url(${smallOnePunch}) right top ;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: ${({ pickedColor }) =>
-    pickedColor !== "" ? pickedColor : "white"};
-  z-index: 139;
-  #bottom-element {
-    position: absolute;
-    bottom: 5%;
-  }
-  #scrollText {
-    font-family: Archivo;
-    font-size: 1.3em;
-    transform: rotate(270deg);
-    margin: 0px;
-  }
+	position: relative;
+	height: 99vh;
+	overflow: scroll;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 99vw;
+	background-image: url(${standingSaitama}), url(${smallOnePunch});
+	background: url(${standingSaitama}) left top 20px,
+		url(${smallOnePunch}) right top;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-color: ${({ pickedColor }) =>
+		pickedColor !== "" ? pickedColor : "white"};
+	z-index: 139;
+	#bottom-element {
+		position: absolute;
+		bottom: 5%;
+	}
+	#scrollText {
+		font-family: Archivo;
+		font-size: 1.3em;
+		transform: rotate(270deg);
+		margin: 0px;
+	}
 
-  &::-webkit-scrollbar {
-    position: relative;
-    width: 60px;
-    overflow: visible;
-  }
+	&::-webkit-scrollbar {
+		position: relative;
+		width: 60px;
+		overflow: visible;
+	}
 
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-    height: 100px;
-  }
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+		height: 100px;
+	}
 
-  /* scrollbar itself */
-  &::-webkit-scrollbar-thumb {
-    height: 100px;
-    background-color: transparent;
-    background-image: url(${saitamaHanging}) !important;
-    background-size: contain;
-    background-position: start;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    border-radius: 16px;
-  }
+	/* scrollbar itself */
+	&::-webkit-scrollbar-thumb {
+		height: 100px;
+		background-color: transparent;
+		background-image: url(${saitamaHanging}) !important;
+		background-size: contain;
+		background-position: start;
+		background-size: 100%;
+		background-repeat: no-repeat;
+		border-radius: 16px;
+	}
 
-  @media screen and (max-width: 980px) {
-    background: url(${standingSaitama}) left bottom,
-      url(${smallOnePunch}) right bottom;
-    background-repeat: no-repeat;
-    background-size: 50%;
-    &::-webkit-scrollbar {
-      position: absolute;
-      width: 45px;
-    }
-  }
+	@media screen and (max-width: 980px) {
+		background: url(${standingSaitama}) left bottom,
+			url(${smallOnePunch}) right bottom;
+		background-repeat: no-repeat;
+		background-size: 50%;
+		background-color: ${({ pickedColor }) =>
+			pickedColor !== "" ? pickedColor : "white"};
+		&::-webkit-scrollbar {
+			position: absolute;
+			width: 45px;
+		}
+	}
 `;
 const Header = styled.div`
   position: relative;
