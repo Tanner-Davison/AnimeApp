@@ -8,48 +8,47 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
     const [ratedByUsers, setRatedByUsers]= useState(scoredBy !== null ? scoredBy.toLocaleString() : null);
    
     return (
-			<>
-				<Wrapper >
-					<h3>
-						{" "}
-						<div className={"scoreDiv"}>
-							<ComplexTitle
-								id={"title"}
-								animeScore={scoredBy}
-								title={"Weeb Score"}
-							/>
+      <>
+        {YtVideoUrl !== null && (
+          <YoutubeWrapper>
+            <iframe
+              id={"ytId"}
+              title={YtVideoUrl}
+              width="400"
+              src={YtVideoUrl}
+              frameBorder={"1"}
+              allowFullScreen></iframe>
+          </YoutubeWrapper>
+        )}
+        <Wrapper>
+          <h3>
+            {" "}
+            <div className={"scoreDiv"}>
+              <ComplexTitle
+                id={"title"}
+                animeScore={scoredBy}
+                title={"Weeb Score"}
+              />
 
-							<span id={"number"}>
-								{" "}
-								{score} /<em id='ten'>10</em>{" "}
-							</span>
-							<h5>
-								<div className={"scoredBy"}>
-									<div id={"spanNum"}>
-										<em>Rated By :</em>
-										<em id={"numberBig"}>
-											{scoredBy !== null ? ratedByUsers + " People" : "No One"}
-										</em>
-									</div>
-								</div>
-							</h5>
-						</div>
-					</h3>
-				</Wrapper>
-					{YtVideoUrl !== null && (
-				<YoutubeWrapper>
-						<iframe
-                            id={"ytId"}
-							title={YtVideoUrl}
-							width='400'
-							
-							src={YtVideoUrl}
-							frameBorder={'1'}
-							allowFullScreen></iframe>
-				</YoutubeWrapper>
-					)}
-			</>
-		);
+              <span id={"number"}>
+                {" "}
+                {score} /<em id="ten">10</em>{" "}
+              </span>
+              <h5>
+                <div className={"scoredBy"}>
+                  <div id={"spanNum"}>
+                    <em>Rated By :</em>
+                    <em id={"numberBig"}>
+                      {scoredBy !== null ? ratedByUsers + " People" : "No One"}
+                    </em>
+                  </div>
+                </div>
+              </h5>
+            </div>
+          </h3>
+        </Wrapper>
+      </>
+    );
 };
 
 export default RightComponent;
@@ -148,17 +147,22 @@ const YoutubeWrapper = styled.div`
   height: 100%;
   align-items: flex-end;
   justify-content: flex-end;
-  
+
   #ytId {
     border-radius: 17px;
-	height: 100%;
-	min-height: 300px;
-   
+    height: 100%;
+    min-height: 300px;
+	width:30vw;
   }
   @media screen and (max-width: 980px) {
-	align-items: center;
-	justify-content: center;
-    margin-bottom:50px;
-    width:50%
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    width: 50%;
+    #ytId {
+      border-radius: 17px;
+      height: 99%;
+      width: 196%;
+    }
   }
 `;

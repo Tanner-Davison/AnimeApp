@@ -120,12 +120,13 @@ const CardWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	min-width: fit-content;
+	width: fit-content;
 	align-items: center;
 	justify-content: center;
 	gap: 0.25rem;
 	margin: 1rem auto;
 	background: transparent;
-	width: 73vw;
+	
 	z-index: 1;
 
 	.flex {
@@ -162,7 +163,7 @@ const CardWrapper = styled.div`
 		flex-direction: column;
 		background: rgba(0, 0, 0, 0.87);
 		gap: 0.025rem;
-		width: 100%;
+		width: 50%;
 		color: white;
 		padding: 1rem 2rem;
 		text-align: center;
@@ -170,11 +171,13 @@ const CardWrapper = styled.div`
 		z-index: 1;
 	}
 	.card-content {
+		position: relative;
 		display: flex;
 		flex-direction: row;
-		width: 100%;
+		min-width: fit-content;
+		width:50%;
 		margin: 10px;
-		gap: 10px;
+		gap: 2vw;
 		align-items: center;
 		justify-content: space-around;
 	}
@@ -278,9 +281,8 @@ const CardWrapper = styled.div`
 
 		z-index: 1;
 		.card {
-			padding-bottom: 2.3rem;
 			min-width: 50%;
-			width: 100%;
+			width: 68%;
 		}
 		.card-content {
 			flex-direction: column;

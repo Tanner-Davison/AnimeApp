@@ -7,8 +7,10 @@ const BasicTitle = styled.h1`
   color:whitesmoke;
   text-shadow: 4px 4px 10px black;
   text-transform: capitalize;
+  border-radius: 17px;
+  border:1px solid transparent;
   backdrop-filter: blur(3px);
-  padding:3px 5px;
+  padding:1px 10px;
 
   @media screen and (min-width:800px) and (max-width:1150px) {
     font-size:2rem;
