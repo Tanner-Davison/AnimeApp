@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import SettingsTool from "./SettingsTool";
-const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick }) => {
+const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick, colorToolOpen }) => {
+  
   return (
     <>
     <SearchDiv>
@@ -15,7 +16,7 @@ const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSett
       <Button color="primary" variant="contained" onClick={onSearch}>
         Search
       </Button>
-    <SettingsTool id={'settingsTool'} onSettingsClick={onSettingsClick}/>
+        <SettingsTool id={'settingsTool '} onSettingsClick={onSettingsClick} colorToolOpen={colorToolOpen} />
     </SearchDiv>
     </>
   );
