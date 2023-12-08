@@ -15,7 +15,7 @@ import { ArrowButton } from "./components/Buttons";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import standingSaitama from "./components/imgs/standingSaitama.webp";
 import smallOnePunch from "./components/imgs/smallOnePunch.png";
-
+import CopOutHeader from "./components/CopOutHeader";
 const DarkTheme = {
 	color: "white",
 };
@@ -118,6 +118,7 @@ function App() {
 							)}
 						</Header>
 					</HeaderWrapper>
+					<CopOutHeader pageData={pageData} />
 
 					{searchResult !== "" &&
 						searchResult.map((result) => {

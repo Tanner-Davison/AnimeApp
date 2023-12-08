@@ -43,7 +43,7 @@ const PageTurner = ({
 						<p>Page {currentPage - 1} </p>
 					</div>
 				)}
-				{lastPage > 2 && openNav && (
+				{lastPage > 2  && (
 					<div className={"pages"}>
 						{pages.map((page) => {
 							return (
@@ -133,6 +133,8 @@ const Wrapper = styled.div`
 		font-size: 1.5em;
 		background-color: #645cff;
 		color: white;
+		cursor: pointer;
+		transition:transform .2s ease-in-out;
 	}
 	#page-button:hover {
 		transform: scale(1.1);
