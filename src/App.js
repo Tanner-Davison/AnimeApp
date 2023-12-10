@@ -86,6 +86,7 @@ function App() {
 
 	useEffect(() => {
 		console.log(pageData);
+
 		if (scrollFunc === true) {
 			console.log("this is running working");
 			handleScroll();
