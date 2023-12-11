@@ -13,7 +13,7 @@ const BasicTitle = styled.h1`
   padding:1px 10px;
 
   @media screen and (min-width:800px) and (max-width:1150px) {
-    font-size:2rem;
+    font-size:2.1rem;
   }
   @media screen and (max-width: 800px){
     font-size: 1.6rem;
