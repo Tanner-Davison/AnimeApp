@@ -6,7 +6,7 @@ const currentPage = pageData.current_page;
 	const lastPage = pageData.last_visible_page;
   return (
 		<Wrapper>
-			<h3>Page : {currentPage} of {lastPage} </h3>
+			<h3>Pages {currentPage} of {lastPage} </h3>
 		</Wrapper>
 	);
 }

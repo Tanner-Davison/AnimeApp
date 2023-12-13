@@ -95,6 +95,8 @@ const AnimeCardComponent = ({
 						</div>
 									}
 					</div>
+					
+							
 					<BottomInfo
 						key={animeData.mal_id}
 						tvType={tvType}
@@ -102,7 +104,7 @@ const AnimeCardComponent = ({
 						rating={rating}
 						episodes={episodes}>
 						{" "}
-					</BottomInfo>
+							</BottomInfo>
 				</div>
 
 				<DefaultButton onClick={() => getForumData(animeData.mal_id)}>

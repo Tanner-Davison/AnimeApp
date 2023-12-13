@@ -119,7 +119,10 @@ function App() {
 							)}
 						</Header>
 					</HeaderWrapper>
-					<CopOutHeader pageData={pageData} />
+					{
+						searchResult && (
+							<CopOutHeader pageData={pageData} />
+						)}
 
 					{searchResult !== "" &&
 						searchResult.map((result) => {
@@ -134,18 +137,20 @@ function App() {
 							);
 						})}
 					<div id={"bottomElement"}></div>
-					<PageTurner
-						pageData={pageData}
-						handleSearch={handleSearch}
-						searchQuery={searchQuery}
-						onNextPage={() => {
-							handleSearch(pageData.current_page + 1);
-						}}
-						setScrollFunc={setScrollFunc}
-						onPageClick={handleSearch}
-						onPrevPage={() => {
-							handleSearch(pageData.current_page - 1);
-						}}></PageTurner>
+					{searchResult && (
+						<PageTurner
+							pageData={pageData}
+							handleSearch={handleSearch}
+							searchQuery={searchQuery}
+							onNextPage={() => {
+								handleSearch(pageData.current_page + 1);
+							}}
+							setScrollFunc={setScrollFunc}
+							onPageClick={handleSearch}
+							onPrevPage={() => {
+								handleSearch(pageData.current_page - 1);
+							}}></PageTurner>
+					)}
 
 					<ArrowButton
 						type='button'
