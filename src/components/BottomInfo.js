@@ -35,24 +35,25 @@ const Wrapper = styled.div`
 	color: white;
 	align-items: center;
 	justify-content: center;
-	gap:10%;
+	gap: 10%;
 	font-family: Archivo;
 	text-align: center;
 	margin-bottom: 20px;
+	padding:.5em 1em;
 
 	h2,
 	p {
 		margin: 0.25em;
 	}
 	h2 {
-		font-size: 1.8rem;
+		font-size: 1.4rem;
 	}
 	p {
-		font-size: 1.3rem;
+		font-size: 0.9rem;
 		color: white;
 	}
 	#episodeNumWrapper {
-		border-radius: 50px;
+		border-radius: 7px;
 		box-sizing: border-box;
 		border: 2px solid white;
 		padding: 0.2rem 0.5rem;
@@ -63,7 +64,7 @@ const Wrapper = styled.div`
 			margin: 0.25em;
 		}
 		p {
-			font-size: 0.7rem;
+			font-size: 0.9rem;
 			margin: 0.25em;
 		}
 		#episodeNumWrapper {
@@ -89,6 +90,9 @@ const Item = styled.div`
 	border: 1px solid white;
 	border-radius: 12px;
 	margin-top: 5%;
+	#ratingP{
+		font-size:.9rem;
+	}
 	@media screen and (max-width: 980px) {
 		flex-direction: column;
 		height: 60px;

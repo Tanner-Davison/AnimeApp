@@ -32,9 +32,9 @@ const PageTurner = ({
 		getAllPageNums();
 	}, [pageData]);
 	return (
-		<Wrapper >
+		<Wrapper>
 			<>
-				{currentPage > 1 &&  (
+				{currentPage > 1 && (
 					<div id={"flex-row"}>
 						<NavigateBeforeIcon
 							id={"iconId"}
@@ -43,7 +43,8 @@ const PageTurner = ({
 						<p>Page {currentPage - 1} </p>
 					</div>
 				)}
-				{lastPage > 2  && (
+				{currentPage === 1 && <div></div>}
+				{lastPage > 2 && (
 					<div className={"pages"}>
 						{pages.map((page) => {
 							return (
@@ -52,7 +53,7 @@ const PageTurner = ({
 									key={page}
 									value={page}
 									onClick={() => handleSearch(page)}>
-									{page + 1}
+									{page += 1}
 								</button>
 							);
 						})}
@@ -134,7 +135,7 @@ const Wrapper = styled.div`
 		background-color: #645cff;
 		color: white;
 		cursor: pointer;
-		transition:transform .2s ease-in-out;
+		transition: transform 0.2s ease-in-out;
 	}
 	#page-button:hover {
 		transform: scale(1.1);
