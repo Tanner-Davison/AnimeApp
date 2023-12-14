@@ -16,6 +16,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import standingSaitama from "./components/imgs/standingSaitama.webp";
 import smallOnePunch from "./components/imgs/smallOnePunch.png";
 import CopOutHeader from "./components/CopOutHeader";
+
 const DarkTheme = {
 	color: "white",
 };
@@ -30,6 +31,7 @@ function App() {
 	const [loading, setLoading] = useState(false);
 	const [pickedColor, setPickedColor] = useState("black");
 	const [isColorToolOpen, setIsColorToolOpen] = useState(false);
+
 	const handleScroll = () => {
 		console.log("running");
 		const element = document.getElementById("headerId");
@@ -38,12 +40,15 @@ function App() {
 			block: "start",
 		});
 	};
+
 	const handleSettingsClick = () => {
 		return setIsColorToolOpen(!isColorToolOpen);
 	};
+
 	const handleColorChange = (color) => {
 		setPickedColor(color);
 	};
+
 	const scrollToBottom = () => {
 		const bottom = document.getElementById("bottomElement");
 		bottom.scrollIntoView({
@@ -52,6 +57,7 @@ function App() {
 			inline: "nearest",
 		});
 	};
+
 	const handleOnMouseOver = () => {
 		setScrollText("scroll");
 		return setOpenNav(true);
@@ -86,7 +92,6 @@ function App() {
 
 	useEffect(() => {
 		console.log(pageData);
-
 		if (scrollFunc === true) {
 			console.log("this is running working");
 			handleScroll();
@@ -119,11 +124,7 @@ function App() {
 							)}
 						</Header>
 					</HeaderWrapper>
-					{
-						searchResult && (
-							<CopOutHeader pageData={pageData} />
-						)}
-
+					{searchResult && <CopOutHeader pageData={pageData} />}
 					{searchResult !== "" &&
 						searchResult.map((result) => {
 							return (
@@ -151,7 +152,7 @@ function App() {
 								handleSearch(pageData.current_page - 1);
 							}}></PageTurner>
 					)}
-
+					;
 					<ArrowButton
 						type='button'
 						id={"arrow"}
@@ -214,7 +215,7 @@ const Wrapper = styled.div`
 	width: 99vw;
 	background-image: url(${standingSaitama}), url(${smallOnePunch});
 	background: url(${standingSaitama}) left top 20px,
-		url(${smallOnePunch}) right top;
+	url(${smallOnePunch}) right top;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-color: ${({ pickedColor }) =>
@@ -241,7 +242,6 @@ const Wrapper = styled.div`
 		background-color: transparent;
 		height: 100px;
 	}
-
 	/* scrollbar itself */
 	&::-webkit-scrollbar-thumb {
 		height: 100px;
@@ -253,7 +253,6 @@ const Wrapper = styled.div`
 		background-repeat: no-repeat;
 		border-radius: 16px;
 	}
-
 	@media screen and (max-width: 980px) {
 		background: url(${standingSaitama}) left bottom,
 			url(${smallOnePunch}) right bottom;
@@ -297,7 +296,6 @@ const HeaderWrapper = styled.div`
 	background-color: rgb(39 38 39 / 80%);
 	z-index: 200;
 	animation: slideRight 0.5s linear backwards;
-
 	@keyframes slideRight {
 		from {
 			transform: translateY(300%);
@@ -320,7 +318,6 @@ const NavPage = styled.div`
 	background: transparent;
 	z-index: 150;
 	gap: 10px;
-
 	p {
 		font-family: Archivo;
 		font-size: 1em;
@@ -354,7 +351,6 @@ const NavPage = styled.div`
 			}
 		}
 	}
-
 	.pageGuides:hover {
 		transform: scale(1.1);
 	}

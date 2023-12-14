@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import saitamaAndFriends from './imgs/saitamaAndFriends.png';
-const ComplexTitle = ({title, animeScore}) => {
+const ComplexTitle = ({title}) => {
   
   return (
     <Wrapper>
