@@ -4,8 +4,7 @@ import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
 const ColorPickerComponent = ({onColorChange, onSettingsClick}) => {
-  const [color, setColor] = useState("#ffffff"); // Default color
-  const [chromePicker, setChromePicker]=useState('chromePicker')
+  const [color, setColor] = useState("#ffffff"); 
   const handleChange = (updatedColor) => {
     setColor(updatedColor.hex);
     onColorChange(updatedColor.hex)
