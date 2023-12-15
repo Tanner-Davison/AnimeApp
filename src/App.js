@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import ColorPickerComponent from "./components/ColorPicker";
 import styled, { ThemeProvider } from "styled-components";

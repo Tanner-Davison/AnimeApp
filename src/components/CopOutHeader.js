@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 const CopOutHeader = ({ pageData }) => {
 const currentPage = pageData.current_page;
-	const nextPage = pageData.has_next_page;
 	const lastPage = pageData.last_visible_page;
   return (
 		<Wrapper>
