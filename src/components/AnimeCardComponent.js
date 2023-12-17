@@ -108,7 +108,7 @@ const AnimeCardComponent = ({
 				</div>
 
 				<DefaultButton onClick={() => getForumData(animeData.mal_id)}>
-					need to fix
+					should be forum
 				</DefaultButton>
 			</CardWrapper>
 		</>
