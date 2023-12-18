@@ -362,7 +362,7 @@ const NavPage = styled.div`
     }
   }
   .pageGuides:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 
   #pointing-down {
