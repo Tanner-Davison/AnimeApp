@@ -14,7 +14,7 @@ const ColorPickerComponent = ({onColorChange, onSettingsClick}) => {
 		<Wrapper
 			draggable='false'
 			color={color}>
-			<h2>Custom Background</h2>
+			<h2>Background Color</h2>
 			<TopFlex>
         <button
           className={'applyBtn'}
