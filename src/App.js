@@ -17,6 +17,7 @@ import smallOnePunch from "./components/imgs/smallOnePunch.png";
 import CopOutHeader from "./components/CopOutHeader";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 const DarkTheme = {
   color: "white",
 };
@@ -118,12 +119,14 @@ const scrollToBottom = () => {
           <HeaderWrapper>
             <Header id={"headerId"} className={"header"}>
               <BasicTitle>Search For Any Anime </BasicTitle>
+             
               <SearchContainer
                 searchQuery={searchQuery}
                 onSearch={() => handleSearch()}
                 onQueryChange={(query) => setSearchQuery(query)}
                 onSettingsClick={handleSettingsClick}
                 loading={loading}
+                pageData={searchResult}
               />
               {isColorToolOpen && (
                 <ColorPickerComponent
@@ -132,12 +135,15 @@ const scrollToBottom = () => {
                   colorToolOpen={isColorToolOpen}
                 />
               )}
+              
             </Header>
           </HeaderWrapper>
           {searchResult && <CopOutHeader pageData={pageData} />}
           {searchResult !== "" &&
+          
             searchResult.map((result) => {
               return (
+                
                 <AnimeCardComponent
                   key={result.mal_id}
                   animeData={result}

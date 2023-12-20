@@ -2,22 +2,29 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import SettingsTool from "./SettingsTool";
-const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick, colorToolOpen }) => {
+import FilteredPicker from "./FilteredPicker";
+
+const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick, colorToolOpen, pageData }) => {
   
   return (
     <>
-    <SearchDiv>
-      <StyledInput
-        type="text"
-        value={searchQuery}
-        placeholder={searchQuery}
-        onChange={(e) => onQueryChange(e.target.value)}
-      />
-      <Button color="primary" variant="contained" onClick={onSearch}>
-        Search
-      </Button>
-        <SettingsTool id={'settingsTool '} onSettingsClick={onSettingsClick} colorToolOpen={colorToolOpen} />
-    </SearchDiv>
+      <SearchDiv>
+        <FilteredPicker pageData={pageData}/>
+        <StyledInput
+          type="text"
+          value={searchQuery}
+          placeholder={searchQuery}
+          onChange={(e) => onQueryChange(e.target.value)}
+        />
+        <Button color="primary" variant="contained" onClick={onSearch}>
+          Search
+        </Button>
+        <SettingsTool
+          id={"settingsTool "}
+          onSettingsClick={onSettingsClick}
+          colorToolOpen={colorToolOpen}
+        />
+      </SearchDiv>
     </>
   );
 };
@@ -28,6 +35,7 @@ const SearchDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  height: 35px;
   
 `;
 
