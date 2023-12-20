@@ -142,16 +142,17 @@ const scrollToBottom = () => {
           {searchResult !== "" &&
           
             searchResult.map((result) => {
-              return (
-                
-                <AnimeCardComponent
-                  key={result.mal_id}
-                  animeData={result}
-                  scrollToTop={handleScroll}
-                  setScrollFunc={setScrollFunc}
-                  scrollFunc={scrollFunc}
-                />
-              );
+              if (result.rating === 'Rx - Hentai') {
+								return (
+									<AnimeCardComponent
+										key={result.mal_id}
+										animeData={result}
+										scrollToTop={handleScroll}
+										setScrollFunc={setScrollFunc}
+										scrollFunc={scrollFunc}
+									/>
+								);
+							} else return "";
             })}
           <div id={"bottomElement"}></div>
           {searchResult && (

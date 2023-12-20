@@ -16,6 +16,7 @@ const getSearchData = async ({searchQuery:params, pageQuery}) =>{
  };
    try {
      const response = await axios.request(options);
+     console.log(response)
      return { response: response.data.data, pageData: response.data.pagination };
    } catch (err) {
      console.log(err);
