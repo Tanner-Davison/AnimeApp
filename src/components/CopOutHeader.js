@@ -26,7 +26,6 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	min-height: 150px;
-
 	h3 {
 		font-family: Archivo;
 		font-size: 1.4rem;
