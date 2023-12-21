@@ -15,15 +15,15 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import standingSaitama from "./components/imgs/standingSaitama.webp";
 import smallOnePunch from "./components/imgs/smallOnePunch.png";
 import CopOutHeader from "./components/CopOutHeader";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 const DarkTheme = {
   color: "white",
 };
 
+gsap.registerPlugin(ScrollToPlugin);
 function App() {
-	gsap.registerPlugin(ScrollToPlugin);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [pageData, setPageData] = useState("");
@@ -47,21 +47,24 @@ function App() {
 //   gsap.to(window, { duration: 1, scrollTo: "#headerId", ease: "power2.inOut" });
 // };
 
-const scrollToBottom = () => {
-  const bottom = document.getElementById("bottomElement");
-  bottom.scrollIntoView({
-	behavior: "smooth",
-	block: "end",
-	inline: "nearest",
-  });
-};
 // const scrollToBottom = () => {
-//   gsap.to(window, {
-//     duration: 1,
-//     scrollTo: "#bottomElement",
-//     ease: "power2.inOut",
+//   const bottom = document.getElementById("bottomElement");
+//   bottom.scrollIntoView({
+// 	behavior: "smooth",
+// 	block: "end",
+// 	inline: "nearest",
 //   });
 // };
+  const scrollToBottom = () => {
+    console.log('i am firing')
+    const wrapper = document.getElementById('wrapper')
+    gsap.to(wrapper, {
+      duration: 2,
+      scrollTo: {y:"#bottomElement", offsetY: -500
+    },
+    ease: "slow",
+  })
+};
   const handleSettingsClick = () => {
     return setIsColorToolOpen(!isColorToolOpen);
   };
@@ -115,7 +118,7 @@ const scrollToBottom = () => {
   return (
     <>
       <ThemeProvider theme={DarkTheme}>
-        <Wrapper pickedColor={pickedColor}>
+        <Wrapper id='wrapper' pickedColor={pickedColor}>
           <HeaderWrapper>
             <Header id={"headerId"} className={"header"}>
               <BasicTitle>Search For Any Anime </BasicTitle>
@@ -142,10 +145,10 @@ const scrollToBottom = () => {
           {searchResult !== "" &&
           
             searchResult.map((result) => {
-              if (result.rating === 'Rx - Hentai') {
+              if (result.rating !== 'Rx - Hentai') {
 								return (
 									<AnimeCardComponent
-										key={result.mal_id}
+                    key={result.mal_id}
 										animeData={result}
 										scrollToTop={handleScroll}
 										setScrollFunc={setScrollFunc}
@@ -154,7 +157,7 @@ const scrollToBottom = () => {
 								);
 							} else return "";
             })}
-          <div id={"bottomElement"}></div>
+          <div id="bottomElement"></div>
           {searchResult && (
             <PageTurner
               pageData={pageData}
