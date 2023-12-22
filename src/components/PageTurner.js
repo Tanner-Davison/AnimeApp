@@ -121,8 +121,7 @@ const Wrapper = styled.div`
 		height: 100%;
 		padding: 1rem auto;
 		gap: 15px;
-		overflow-x: scroll;
-		overflow-y: visible;
+		
 	}
 	#page-button {
 		box-sizing: border-box;
