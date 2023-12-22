@@ -1,24 +1,21 @@
-import React from 'react'
+
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const FilteredPicker = ({pageData}) => {
- const animeTypes = ['TV','Special','Movie','OVA','ONA',"Music"]
-  const [currentValue, setCurrentValue] = useState('All')
-  const handleChange = (e) => {
-    setCurrentValue(e.target.value);
-  }
-  useState(() => {
-    console.log(currentValue)
-  },[currentValue])
+const FilteredPicker = ({pageData, handleSelection, currentSelection}) => {
+ const animeTypes = ['tv','special','movie','ova','ona',"music"]
+  
+
+
   return (
 		<Wrapper>
 			<label htmlFor='animeTypeList'>Filter</label>
 			<select
         name='Types:'
         id={"animeTypeList"}
-        onChange={(e)=>handleChange(e)}>
-        <option value='ALL'selected='All'>ALL</option>
+        onChange={(e)=>handleSelection(e)}
+        value={currentSelection}>
+          <option value={''}>ALL</option>
 				{animeTypes.map((option) => {
           return <option
             key={option}

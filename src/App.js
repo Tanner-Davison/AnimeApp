@@ -33,6 +33,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [pickedColor, setPickedColor] = useState("black");
   const [isColorToolOpen, setIsColorToolOpen] = useState(false);
+  const [currentSelection, setCurrentSelection] = useState("");
   
 
   // const handleScroll = () => {
@@ -43,12 +44,17 @@ function App() {
   //     block: "start",
   //   });
   // };
+    const handleSelection = (e) => {
+      console.log("running selection");
+
+      setCurrentSelection(e.target.value);
+    };
 const handleScroll = () => {
  const wrapper = document.getElementById("wrapper");
   gsap.to(wrapper, {
-    duration: 3,
-    scrollTo: { y: "#topPageCounter", offsetY: -300 },
-    ease: 'power2.inOut',
+    duration: 2,
+    scrollTo: { y: "#topPageCounter", offsetY: -500 },
+    ease: "back.out",
   });
 };
 
@@ -63,10 +69,10 @@ const handleScroll = () => {
   const scrollToBottom = () => {
     const wrapper = document.getElementById('wrapper')
     gsap.to(wrapper, {
-      duration: 2.5,
+      duration: 2,
       scrollTo: {y:"#bottomElement", offsetY: 900
     },
-    ease: 'expo.inOut',
+    ease: "power4.out",
   })
 };
   const handleSettingsClick = () => {
@@ -90,6 +96,7 @@ const handleScroll = () => {
 
   const handleSearch = async (pageOption) => {
     setScrollFunc(true);
+    let filterBy = currentSelection;
     let pageQuery = null;
     if (pageOption) {
       pageQuery = pageOption;
@@ -97,7 +104,7 @@ const handleScroll = () => {
     if (searchQuery.trim() !== "") {
       setLoading(true);
       try {
-        const searchData = await getSearchData({ searchQuery, pageQuery });
+        const searchData = await getSearchData({ searchQuery, pageQuery, filterBy });
         setSearchResult(searchData.response);
         setPageData(searchData.pageData);
       } catch (error) {
@@ -134,6 +141,8 @@ const handleScroll = () => {
                 onSettingsClick={handleSettingsClick}
                 loading={loading}
                 pageData={searchResult}
+                currentSelection={currentSelection}
+                handleSelection={handleSelection}
               />
               {isColorToolOpen && (
                 <ColorPickerComponent
@@ -149,7 +158,7 @@ const handleScroll = () => {
           {searchResult !== "" &&
           
             searchResult.map((result) => {
-              if (result.rating !== 'Rx - Hentai') {
+              if (result.type !== 'Rx - Hentai') {
 								return (
 									<AnimeCardComponent
                     key={result.mal_id}

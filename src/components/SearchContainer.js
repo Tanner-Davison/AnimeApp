@@ -4,12 +4,24 @@ import { Button } from "@mui/material";
 import SettingsTool from "./SettingsTool";
 import FilteredPicker from "./FilteredPicker";
 
-const SearchContainer = ({ searchQuery, onSearch, onQueryChange, loading, onSettingsClick, colorToolOpen, pageData }) => {
-  
+const SearchContainer = ({
+  searchQuery,
+  onSearch,
+  onQueryChange,
+  loading,
+  onSettingsClick,
+  colorToolOpen,
+  pageData,
+  handleSelection,
+  currentSelection,
+}) => {
   return (
     <>
       <SearchDiv>
-        <FilteredPicker pageData={pageData}/>
+        <FilteredPicker 
+        pageData={pageData}
+        currentSelection={currentSelection}
+        handleSelection={handleSelection} />
         <StyledInput
           type="text"
           value={searchQuery}
@@ -36,7 +48,6 @@ const SearchDiv = styled.div`
   display: flex;
   justify-content: center;
   height: 35px;
-  
 `;
 
 const StyledInput = styled.input`
@@ -46,12 +57,12 @@ const StyledInput = styled.input`
   padding-left: 10px;
   transition: width 0.3s ease-in-out;
   font-family: Archivo;
-  color:white;
+  color: white;
   background-color: black;
-  border:2px solid snow;
+  border: 2px solid snow;
   &:focus {
     width: 200px;
-    outline:none;
+    outline: none;
   }
 
   @media screen and (max-width: 980px) {
