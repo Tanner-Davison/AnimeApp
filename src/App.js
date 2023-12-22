@@ -35,17 +35,22 @@ function App() {
   const [isColorToolOpen, setIsColorToolOpen] = useState(false);
   
 
-  const handleScroll = () => {
-    console.log("running");
-    const element = document.getElementById("headerId");
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-// const handleScroll = () => {
-//   gsap.to(window, { duration: 1, scrollTo: "#headerId", ease: "power2.inOut" });
-// };
+  // const handleScroll = () => {
+  //   console.log("running");
+  //   const element = document.getElementById("headerId");
+  //   element.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // };
+const handleScroll = () => {
+ const wrapper = document.getElementById("wrapper");
+  gsap.to(wrapper, {
+    duration: 2,
+    scrollTo: { y: "#topPageCounter", offsetY: -500 },
+    ease: "back.out",
+  });
+};
 
 // const scrollToBottom = () => {
 //   const bottom = document.getElementById("bottomElement");
@@ -56,13 +61,12 @@ function App() {
 //   });
 // };
   const scrollToBottom = () => {
-    console.log('i am firing')
     const wrapper = document.getElementById('wrapper')
     gsap.to(wrapper, {
       duration: 2,
-      scrollTo: {y:"#bottomElement", offsetY: -500
+      scrollTo: {y:"#bottomElement", offsetY: 900
     },
-    ease: "slow",
+    ease: "power4.out",
   })
 };
   const handleSettingsClick = () => {
@@ -141,7 +145,7 @@ function App() {
               
             </Header>
           </HeaderWrapper>
-          {searchResult && <CopOutHeader pageData={pageData} />}
+          {searchResult && <CopOutHeader id={'TopPageCounter'} pageData={pageData} />}
           {searchResult !== "" &&
           
             searchResult.map((result) => {
