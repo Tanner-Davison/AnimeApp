@@ -6,7 +6,7 @@ import SaitamasFace from './imgs/SaitamasFace.webp';
 
 const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
     const [ratedByUsers, setRatedByUsers]= useState(scoredBy !== null ? scoredBy.toLocaleString() : null);
-   
+   const url = `https://www.youtube.com/embed/${YtVideoUrl}`;
     return (
       <>
         {YtVideoUrl !== null && (
@@ -14,8 +14,9 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
             <iframe
               id={"ytId"}
               title={YtVideoUrl}
-              width="400"
-              src={YtVideoUrl}
+			  width="400"
+			  playerControls='0'
+              src={url}
               frameBorder={"1"}
               allowFullScreen></iframe>
           </YoutubeWrapper>

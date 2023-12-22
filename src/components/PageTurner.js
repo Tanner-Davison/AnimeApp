@@ -65,7 +65,7 @@ const PageTurner = ({
 							key={currentPage}
 							id={"page-button"}>
 							<p>
-								Page {currentPage} of {lastPage}{" "}
+								Showing Page {currentPage} of {lastPage}{" "}
 							</p>{" "}
 						</button>
 						;
@@ -129,7 +129,8 @@ const Wrapper = styled.div`
 		font-family: Archivo;
 		border-radius: 18px;
 		width: auto;
-		height: 52%;
+		height: fit-content;
+		padding:.5em;
 		font-size: 1.5em;
 		background-color: #645cff;
 		color: white;

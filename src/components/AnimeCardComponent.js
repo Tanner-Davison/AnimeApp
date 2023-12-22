@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { HipsterButton, DefaultButton } from "./Buttons";
 import RightComponent from "./RightComponent";
@@ -7,7 +7,7 @@ import BottomInfo from "./BottomInfo";
 import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
-
+import checkLinkAvailability from "./checkLinkAvailability";
 const AnimeCardComponent = ({
 	animeData,
 	
@@ -25,8 +25,14 @@ const AnimeCardComponent = ({
 		tvType === "TV" || ("Special" && tvType !== null)
 			? animeData.episodes
 			: "N/A";
-	const YtVideoUrl = animeData.trailer.embed_url;
-
+	const YtVideoUrl = animeData.trailer.youtube_id;
+	
+	useEffect(() => {
+		if (YtVideoUrl) {
+			console.log(YtVideoUrl)
+		}
+		
+	 },[YtVideoUrl])
 	return (
 		<>
 			<CardWrapper
@@ -44,6 +50,7 @@ const AnimeCardComponent = ({
 								src={animeImg}
 								alt={"animeImg"}
 								loading='lazy'
+								onClick={()=>setShowSummary(!showsummary)}
 							/>
 							{showsummary ? (
 								<DefaultButton
