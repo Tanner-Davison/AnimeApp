@@ -46,9 +46,9 @@ function App() {
 const handleScroll = () => {
  const wrapper = document.getElementById("wrapper");
   gsap.to(wrapper, {
-    duration: 2,
-    scrollTo: { y: "#topPageCounter", offsetY: -500 },
-    ease: "back.out",
+    duration: 3,
+    scrollTo: { y: "#topPageCounter", offsetY: -300 },
+    ease: 'power2.inOut',
   });
 };
 
@@ -63,10 +63,10 @@ const handleScroll = () => {
   const scrollToBottom = () => {
     const wrapper = document.getElementById('wrapper')
     gsap.to(wrapper, {
-      duration: 2,
+      duration: 2.5,
       scrollTo: {y:"#bottomElement", offsetY: 900
     },
-    ease: "power4.out",
+    ease: 'expo.inOut',
   })
 };
   const handleSettingsClick = () => {
