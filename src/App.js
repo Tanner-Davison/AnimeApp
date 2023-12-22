@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import ColorPickerComponent from "./components/ColorPicker";
 import styled, { ThemeProvider } from "styled-components";
 import BasicTitle from "./components/BasicTitle";
 import getSearchData from "./API/getSearchData";
 import SearchContainer from "./components/SearchContainer";
-import AnimeCardComponent from "./components/AnimeCardComponent";
 import AnimeFinal from "./components/imgs/AnimeFinal.png";
 import PageTurner from "./components/PageTurner";
 import onePunchManPointingUp from "./components/imgs/onePunchManPointingUp.jpg";
@@ -17,7 +17,7 @@ import smallOnePunch from "./components/imgs/smallOnePunch.png";
 import CopOutHeader from "./components/CopOutHeader";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
+const AnimeCardComponent = React.lazy(()=> import('./components/AnimeCardComponent'))
 const DarkTheme = {
   color: "white",
 };
@@ -31,7 +31,7 @@ function App() {
   const [openNav, setOpenNav] = useState(false);
   const [scrollText, setScrollText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [pickedColor, setPickedColor] = useState("black");
+  const [pickedcolor, setPickedColor] = useState("black");
   const [isColorToolOpen, setIsColorToolOpen] = useState(false);
   const [currentSelection, setCurrentSelection] = useState("");
   
@@ -129,7 +129,7 @@ const handleScroll = () => {
   return (
     <>
       <ThemeProvider theme={DarkTheme}>
-        <Wrapper id='wrapper' pickedColor={pickedColor}>
+        <Wrapper id='wrapper' pickedcolor={pickedcolor}>
           <HeaderWrapper>
             <Header id={"headerId"} className={"header"}>
               <BasicTitle>Search For Any Anime </BasicTitle>
@@ -158,15 +158,17 @@ const handleScroll = () => {
           {searchResult !== "" &&
           
             searchResult.map((result) => {
-              if (result.type !== 'Rx - Hentai') {
+              if (result.rating !== 'Rx - Hentai') {
 								return (
-									<AnimeCardComponent
-                    key={result.mal_id}
-										animeData={result}
-										scrollToTop={handleScroll}
-										setScrollFunc={setScrollFunc}
-										scrollFunc={scrollFunc}
-									/>
+                  <React.Suspense key={result.mal_id +3}fallback={<div> Loading...</div>}>
+                    <AnimeCardComponent
+                      key={result.mal_id}
+                      animeData={result}
+                      scrollToTop={handleScroll}
+                      setScrollFunc={setScrollFunc}
+                      scrollFunc={scrollFunc}
+                    />
+                  </React.Suspense>
 								);
 							} else return "";
             })}
@@ -251,8 +253,8 @@ const Wrapper = styled.div`
     url(${smallOnePunch}) right top;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: ${({ pickedColor }) =>
-    pickedColor !== "" ? pickedColor : "white"};
+  background-color: ${({ pickedcolor }) =>
+    pickedcolor !== "" ? pickedcolor : "white"};
   z-index: 139;
   #bottom-element {
     position: absolute;
@@ -291,8 +293,8 @@ const Wrapper = styled.div`
       url(${smallOnePunch}) right bottom;
     background-repeat: no-repeat;
     background-size: 50%;
-    background-color: ${({ pickedColor }) =>
-      pickedColor !== "" ? pickedColor : "white"};
+    background-color: ${({ pickedcolor }) =>
+      pickedcolor !== "" ? pickedcolor : "white"};
     &::-webkit-scrollbar {
       position: absolute;
       width: 45px;

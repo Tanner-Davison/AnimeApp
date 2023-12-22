@@ -12,7 +12,7 @@ const AnimeCardComponent = ({
 	animeData,
 	
 }) => {
-	const [showSummary, setShowSummary] = useState(false);
+	const [showsummary, setShowSummary] = useState(false);
 
 	const title = animeData.title_english || animeData.title;
 	const animeImg = animeData.images.jpg.image_url;
@@ -31,7 +31,7 @@ const AnimeCardComponent = ({
 		<>
 			<CardWrapper
 				key={animeData.mal_id + 222}
-				showSummary={showSummary}>
+				showsummary={showsummary}>
 				<div
 					className={"card"}
 					key={animeData.mal_id + 32}>
@@ -43,8 +43,9 @@ const AnimeCardComponent = ({
 							<img
 								src={animeImg}
 								alt={"animeImg"}
+								loading='lazy'
 							/>
-							{showSummary ? (
+							{showsummary ? (
 								<DefaultButton
 									key={animeData.mal_id + 443}
 									onClick={() => {
@@ -67,11 +68,11 @@ const AnimeCardComponent = ({
 							episodes={episodes}
 							score={score}
 							scoredBy={scoredBy}></RightComponent>
-					{showSummary && 
+					{showsummary && 
 						<div
 							key={animeData.mal_id + 34322}
 							className={
-								showSummary ? "dropDownElement" : "dropDownElement drop"
+								showsummary ? "dropDownElement" : "dropDownElement drop"
 							}>
 							<>
 								<div className={"flex"}>
@@ -79,10 +80,11 @@ const AnimeCardComponent = ({
 										id={"synopsisImg"}
 										src={saitamaFaceOnly}
 										alt={"saitamaface"}
+										loading='lazy'
 									/>
 									<h3>Synopsis</h3>
 								</div>
-								<article showSummary>
+								<article showsummary>
 									{animeData.synopsis !== null
 										? animeData.synopsis
 										: "Synopsis not available for this title."}
@@ -244,7 +246,7 @@ const CardWrapper = styled.div`
 		overflow: scroll;
 
 		transition: height 0.2s ease-out;
-		animation: ${({ showSummary }) => showSummary && `slideDown .8s forwards`};
+		animation: ${({ showsummary }) => showsummary && `slideDown .8s forwards`};
 		z-index: -2;
 	}
 	@keyframes slideDown {
