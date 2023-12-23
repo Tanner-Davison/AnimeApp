@@ -16,6 +16,7 @@ import standingSaitama from "./components/imgs/standingSaitama.webp";
 import smallOnePunch from "./components/imgs/smallOnePunch.png";
 import CopOutHeader from "./components/CopOutHeader";
 import gsap from "gsap";
+import { StyleSheetManager } from "styled-components";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 const AnimeCardComponent = React.lazy(()=> import('./components/AnimeCardComponent'))
 const DarkTheme = {
@@ -50,8 +51,8 @@ function App() {
       setCurrentSelection(e.target.value);
     };
 const handleScroll = () => {
- const wrapper = document.getElementById("wrapper");
-  gsap.to(wrapper, {
+ const wrappered = document.getElementById("wrapper");
+  gsap.to(wrappered, {
     duration: 2,
     scrollTo: { y: "#topPageCounter", offsetY: -500 },
     ease: "back.out",
@@ -67,8 +68,8 @@ const handleScroll = () => {
 //   });
 // };
   const scrollToBottom = () => {
-    const wrapper = document.getElementById('wrapper')
-    gsap.to(wrapper, {
+    const wrappered = document.getElementById('wrapper')
+    gsap.to(wrappered, {
       duration: 2,
       scrollTo: {y:"#bottomElement", offsetY: 900
     },
@@ -128,111 +129,115 @@ const handleScroll = () => {
   }, [pageData, scrollFunc]);
   return (
     <>
-      <ThemeProvider theme={DarkTheme}>
-        <Wrapper id='wrapper' pickedcolor={pickedcolor}>
-          <HeaderWrapper>
-            <Header id={"headerId"} className={"header"}>
-              <BasicTitle>Search For Any Anime </BasicTitle>
-             
-              <SearchContainer
-                searchQuery={searchQuery}
-                onSearch={() => handleSearch()}
-                onQueryChange={(query) => setSearchQuery(query)}
-                onSettingsClick={handleSettingsClick}
-                loading={loading}
-                pageData={searchResult}
-                currentSelection={currentSelection}
-                handleSelection={handleSelection}
-              />
-              {isColorToolOpen && (
-                <ColorPickerComponent
-                  onColorChange={handleColorChange}
+      <StyleSheetManager shouldForwardProp={(prop) => prop !== "pickedcolor"}>
+        <ThemeProvider theme={DarkTheme}>
+          <Wrapper id="wrapper" pickedcolor={pickedcolor}>
+            <HeaderWrapper>
+              <Header id={"headerId"} className={"header"}>
+                <BasicTitle>Search For Any Anime </BasicTitle>
+
+                <SearchContainer
+                  searchQuery={searchQuery}
+                  onSearch={() => handleSearch()}
+                  onQueryChange={(query) => setSearchQuery(query)}
                   onSettingsClick={handleSettingsClick}
-                  colorToolOpen={isColorToolOpen}
+                  loading={loading}
+                  pageData={searchResult}
+                  currentSelection={currentSelection}
+                  handleSelection={handleSelection}
                 />
-              )}
-              
-            </Header>
-          </HeaderWrapper>
-          {searchResult && <CopOutHeader id={'TopPageCounter'} pageData={pageData} />}
-          {searchResult !== "" &&
-          
-            searchResult.map((result) => {
-              if (result.rating !== 'Rx - Hentai') {
-								return (
-                  <React.Suspense key={result.mal_id +3}fallback={<div> Loading...</div>}>
-                    <AnimeCardComponent
-                      key={result.mal_id}
-                      animeData={result}
-                      scrollToTop={handleScroll}
-                      setScrollFunc={setScrollFunc}
-                      scrollFunc={scrollFunc}
-                    />
-                  </React.Suspense>
-								);
-							} else return "";
-            })}
-          <div id="bottomElement"></div>
-          {searchResult && (
-            <PageTurner
-              pageData={pageData}
-              handleSearch={handleSearch}
-              searchQuery={searchQuery}
-              onNextPage={() => {
-                handleSearch(pageData.current_page + 1);
-              }}
-              setScrollFunc={setScrollFunc}
-              onPageClick={handleSearch}
-              onPrevPage={() => {
-                handleSearch(pageData.current_page - 1);
-              }}></PageTurner>
-          )}
-          ;
-          <ArrowButton
-            type="button"
-            id={"arrow"}
-            onMouseOver={() => handleOnMouseOver()}
-            onMouseLeave={() => handleOnMouseLeave()}>
-            {
-              <>
-                {}
-                <span id={"scrollText"}>{scrollText}</span>
-                <NavigateNextIcon />
-                {openNav && (
-                  <NavPage>
-                    <button
-                      className={"pageGuides up"}
-                      onClick={() => {
-                        setScrollFunc(true);
-                      }}>
-                      <p>Scroll</p>
-                      <img
-                        id={"pointing-up"}
-                        src={onePunchManPointingUp}
-                        alt={"saitama anime pointing up"}
-                      />
-                      <p> Up</p>
-                    </button>
-                    <button
-                      className={"pageGuides down"}
-                      onClick={() => {
-                        scrollToBottom();
-                      }}>
-                      <p>Scroll</p>
-                      <img
-                        id={"pointing-down"}
-                        src={onePunchPointingDown}
-                        alt={"saitama anime pointing down"}
-                      />
-                      <p> Down</p>
-                    </button>
-                  </NavPage>
+                {isColorToolOpen && (
+                  <ColorPickerComponent
+                    onColorChange={handleColorChange}
+                    onSettingsClick={handleSettingsClick}
+                    colorToolOpen={isColorToolOpen}
+                  />
                 )}
-              </>
-            }
-          </ArrowButton>
-        </Wrapper>
-      </ThemeProvider>
+              </Header>
+            </HeaderWrapper>
+            {searchResult && (
+              <CopOutHeader id={"TopPageCounter"} pageData={pageData} />
+            )}
+            {searchResult !== "" &&
+              searchResult.map((result) => {
+                if (result.rating !== "Rx - Hentai") {
+                  return (
+                    <React.Suspense
+                      key={result.mal_id + 3}
+                      fallback={<div> Loading...</div>}>
+                      <AnimeCardComponent
+                        key={result.mal_id}
+                        animeData={result}
+                        scrollToTop={handleScroll}
+                        setScrollFunc={setScrollFunc}
+                        scrollFunc={scrollFunc}
+                      />
+                    </React.Suspense>
+                  );
+                } else return "";
+              })}
+            <div id="bottomElement"></div>
+            {searchResult && (
+              <PageTurner
+                pageData={pageData}
+                handleSearch={handleSearch}
+                searchQuery={searchQuery}
+                onNextPage={() => {
+                  handleSearch(pageData.current_page + 1);
+                }}
+                setScrollFunc={setScrollFunc}
+                onPageClick={handleSearch}
+                onPrevPage={() => {
+                  handleSearch(pageData.current_page - 1);
+                }}></PageTurner>
+            )}
+
+            <ArrowButton
+              type="button"
+              id={"arrow"}
+              onMouseOver={() => handleOnMouseOver()}
+              onMouseLeave={() => handleOnMouseLeave()}>
+              {
+                <>
+                  {}
+                  <span id={"scrollText"}>{scrollText}</span>
+                  <NavigateNextIcon />
+                  {openNav && (
+                    <NavPage>
+                      <button
+                        className={"pageGuides up"}
+                        onClick={() => {
+                          setScrollFunc(true);
+                        }}>
+                        <p>Scroll</p>
+                        <img
+                          id={"pointing-up"}
+                          src={onePunchManPointingUp}
+                          alt={"saitama anime pointing up"}
+                        />
+                        <p> Up</p>
+                      </button>
+                      <button
+                        className={"pageGuides down"}
+                        onClick={() => {
+                          scrollToBottom();
+                        }}>
+                        <p>Scroll</p>
+                        <img
+                          id={"pointing-down"}
+                          src={onePunchPointingDown}
+                          alt={"saitama anime pointing down"}
+                        />
+                        <p> Down</p>
+                      </button>
+                    </NavPage>
+                  )}
+                </>
+              }
+            </ArrowButton>
+          </Wrapper>
+        </ThemeProvider>
+      </StyleSheetManager>
     </>
   );
 }

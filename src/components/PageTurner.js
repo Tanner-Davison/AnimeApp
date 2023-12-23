@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -11,12 +10,11 @@ const PageTurner = ({
 	handleSearch,
 	setScrollFunc,
 }) => {
-	const [pageQuery, setPageQuery] = useState(null);
+	
 	const [pages, setPages] = useState([]);
 	const currentPage = pageData.current_page;
 	const nextPage = pageData.has_next_page;
 	const lastPage = pageData.last_visible_page;
-	const [openNav, setOpenNav] = useState(false);
 
 	const getAllPageNums = () => {
 		if (lastPage > 2) {
@@ -49,11 +47,11 @@ const PageTurner = ({
 						{pages.map((page) => {
 							return (
 								<button
-									id={"page-button"}
+									className={currentPage === page+1 ? "page-button active":"page-button"}
 									key={page}
 									value={page}
 									onClick={() => handleSearch(page)}>
-									{page += 1}
+									{page +=1}
 								</button>
 							);
 						})}
@@ -88,73 +86,75 @@ const PageTurner = ({
 export default PageTurner;
 
 const Wrapper = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	align-self: center;
-	width: 50vw;
-	gap: 15%;
-	overflow-y: visible;
-	#flex-row {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		color: snow;
-		font-family: Archivo;
-		box-sizing: border-box;
-		padding: 0.25rem;
-		cursor: pointer;
-		background-color: rgba(0, 0, 0, 0.9);
-		transition: transform 0.3s ease-in-out;
-	}
-	.pages {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		max-width: 50%;
-		width: 100%;
-		height: 100%;
-		padding: 1rem auto;
-		gap: 15px;
-		
-	}
-	#page-button {
-		box-sizing: border-box;
-		border: 2px solid white;
-		font-family: Archivo;
-		border-radius: 18px;
-		width: auto;
-		height: fit-content;
-		padding:.5em;
-		font-size: 1.5em;
-		background-color: #645cff;
-		color: white;
-		cursor: pointer;
-		transition: transform 0.2s ease-in-out;
-	}
-	#page-button:hover {
-		transform: scale(1.1);
-	}
-	p {
-		font-family: Archivo;
-		text-wrap: nowrap;
-		color: white;
-		margin: 0;
-		text-align: center;
-		font-size: 1.3rem;
-	}
-	#flex-row:hover {
-		transform: scale(1.2);
-		color: snow;
-	}
-	#iconId {
-		color: white;
-		height: 2.3em;
-		width: 2.3em;
-	}
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  align-self: center;
+  width: 50vw;
+  gap: 15%;
+  overflow-y: visible;
+  #flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: snow;
+    font-family: Archivo;
+    box-sizing: border-box;
+    padding: 0.25rem;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: transform 0.3s ease-in-out;
+  }
+  .pages {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+    width: 100%;
+    height: 100%;
+    padding: 1rem auto;
+    gap: 15px;
+  }
+  .page-button {
+    box-sizing: border-box;
+    border: 2px solid white;
+    font-family: Archivo;
+    border-radius: 18px;
+    width: auto;
+    height: fit-content;
+    padding: 0.5em;
+    font-size: 1.5em;
+    background-color: #645cff;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  .page-button:hover {
+    transform: scale(1.1);
+  }
+  .page-button.active {
+    background-color: #eab747;
+  }
+  p {
+    font-family: Archivo;
+    text-wrap: nowrap;
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  #flex-row:hover {
+    transform: scale(1.2);
+    color: snow;
+  }
+  #iconId {
+    color: white;
+    height: 2.3em;
+    width: 2.3em;
+  }
 `;

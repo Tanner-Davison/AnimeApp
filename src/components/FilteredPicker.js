@@ -7,7 +7,7 @@ const FilteredPicker = ({pageData, handleSelection, currentSelection}) => {
 
   return (
     <Wrapper>
-      {showHead && <ShowHeader>Select Category </ShowHeader>}
+      {showHead && <ShowHeader>Filter by Category </ShowHeader>}
       <select
         name="Types:"
         id={"animeTypeList"}
@@ -17,7 +17,7 @@ const FilteredPicker = ({pageData, handleSelection, currentSelection}) => {
         onMouseLeave={() => setShowHead(false)}
         onMouseOverCapture={() => setShowHead(true)}>
         <option id="optionTag" value={""}>
-          Filter (show all)
+          All Results
         </option>
         {animeTypes.map((option) => {
           return (

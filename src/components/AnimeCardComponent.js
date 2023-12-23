@@ -37,7 +37,7 @@ const AnimeCardComponent = ({
 		<>
 			<CardWrapper
 				key={animeData.mal_id + 222}
-				showsummary={showsummary}>
+				showsummary={showsummary ? 'true': 'false'}>
 				<div
 					className={"card"}
 					key={animeData.mal_id + 32}>
@@ -127,197 +127,204 @@ const AnimeCardComponent = ({
 export default AnimeCardComponent;
 
 const CardWrapper = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	min-width: fit-content;
-	width: fit-content;
-	align-items: center;
-	justify-content: center;
-	gap: 0.25rem;
-	margin: 1rem auto;
-	background: transparent;
-	
-	z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 1rem auto;
+  background: transparent;
 
-	.flex {
-		display: flex;
-		flex-direction: row;
-		padding: 5px;
-		align-items: center;
-		justify-content: center;
-	}
-	#synopsisImg {
-		width: 112px;
-		margin-right: -20px;
-		height: 86px;
-	}
-	#creative {
-		position: relative;
-		width: fit-content;
-		justify-self: flex-end;
-		color: white;
-		width: 50%;
-		font-size: 32px;
-		background-color: black;
-		border-radius: 17px;
-		padding: 1rem;
-	}
-	.card {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: black;
-		min-height: 426px;
-		min-width: fit-content;
-		flex-direction: column;
-		background: rgba(0, 0, 0, 0.87);
-		gap: 0.025rem;
-		width: 50%;
-		color: white;
-		padding: 1rem 2rem;
-		text-align: center;
-		border-radius: 17px;
-		z-index: 1;
-	}
-	.card-content {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		min-width: fit-content;
-		width:50%;
-		margin: 10px;
-		gap: 2vw;
-		align-items: center;
-		justify-content: space-around;
-	}
+  z-index: 1;
 
-	.dropDownElement {
-		position: absolute;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
-		right: 0px;
-		font-size: 1.5rem;
-		bottom: 1px;
-		width: 100%;
-		background-color: rgba(0, 0, 0, 0.9);
-		height: 75%;
-		padding-bottom: 10px;
-		text-align: center;
-		overflow-y: scroll !important;
-		text-overflow: clip;
-		border-radius: 17px;
-		animation: slideDown 0.6s forwards;
-		z-index: 4;
+  .flex {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  #synopsisImg {
+    width: 112px;
+    margin-right: -20px;
+    height: 86px;
+  }
+  #creative {
+    position: relative;
+    width: fit-content;
+    justify-self: flex-end;
+    color: white;
+    width: 50%;
+    font-size: 32px;
+    background-color: black;
+    border-radius: 17px;
+    padding: 1rem;
+  }
+  .card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    min-height: 426px;
+    min-width: fit-content;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.87);
+    gap: 0.025rem;
+    width: 50%;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    border-radius: 17px;
+    z-index: 1;
+  }
+  .card-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    min-width: fit-content;
+    width: 50%;
+    margin: 10px;
+    gap: 2vw;
+    align-items: center;
+    justify-content: space-around;
+  }
 
-		h3 {
-			color: white;
-			align-self: center;
-		}
-		#close-icon {
-			position: absolute;
-			top: 5px;
-			right: 15px;
-			border-radius: 50px;
-			box-sizing: border-box;
-			border: 2px solid red;
-			color: red;
-			transition: transform 0.2s ease-in-out;
-			cursor: pointer;
-		}
-		#close-icon:hover {
-			transform: scale(1.1);
-		}
-	}
+  .dropDownElement {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 110%;
+    justify-content: center;
+    /* right: -32px; */
+    /* width: 19%; */
+    font-size: 1.5rem;
+    bottom: -155px;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 110%;
+    padding-bottom: 10px;
+    text-align: center;
+    text-overflow: clip;
+    border-radius: 17px;
+    animation: slideDown 0.6s forwards;
+    z-index: 4;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    h3 {
+      color: white;
+      align-self: center;
+    }
+    #close-icon {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      border-radius: 50px;
+      box-sizing: border-box;
+      border: 2px solid red;
+      color: red;
+      transition: transform 0.2s ease-in-out;
+      cursor: pointer;
+    }
+    #close-icon:hover {
+      transform: scale(1.1);
+    }
+  }
 
-	.dropDownElement.drop {
-		position: absolute;
-		animation: slideUp 2s forwards;
-	}
+  .dropDownElement.drop {
+    position: absolute;
+    animation: slideUp 2s forwards;
+  }
 
-	article {
-		position: relative;
-		display: flex;
-		border-radius: 17px;
-		padding: 2rem 1rem;
-		font-family: "Archivo", sans-serif;
-		background-color: snow;
-		line-height: 1.9rem;
+  article {
+    position: relative;
+    display: flex;
+    border-radius: 17px;
+    padding: 2rem 1rem;
+    font-family: "Archivo", sans-serif;
+    background-color: snow;
+    line-height: 1.9rem;
 
-		color: whitesmoke;
-		max-width: 80%;
-		background-color: rgba(0, 0, 0, 0.4);
-		overflow: scroll;
+    color: whitesmoke;
+    max-width: 80%;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+    transition: height 0.2s ease-out;
+    animation: ${({ showsummary }) => showsummary && `slideDown .8s forwards`};
+    z-index: -2;
+  }
+  @keyframes slideDown {
+    from {
+      transform: translateX(-300%);
 
-		transition: height 0.2s ease-out;
-		animation: ${({ showsummary }) => showsummary && `slideDown .8s forwards`};
-		z-index: -2;
-	}
-	@keyframes slideDown {
-		from {
-			transform: translateX(-300%);
+      width: 100%;
+    }
+    to {
+      transform: translateX(0);
 
-			width: 100%;
-		}
-		to {
-			transform: translateX(0);
+      width: 100%;
+    }
+  }
 
-			width: 100%;
-		}
-	}
+  @keyframes slideUp {
+    0% {
+      transform: translateX(0);
+    }
 
-	@keyframes slideUp {
-		0% {
-			transform: translateX(0);
-		}
+    100% {
+      transform: translateX(-1000%);
+    }
+  }
+  @media screen and (max-width: 980px) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    margin: 1rem 45px;
+    background: transparent;
+    width: 70vw;
 
-		100% {
-			transform: translateX(-1000%);
-		}
-	}
-	@media screen and (max-width: 980px) {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		min-width: fit-content;
-		align-items: center;
-		justify-content: center;
-		gap: 0.25rem;
-		margin: 1rem 45px;
-		background: transparent;
-		width: 70vw;
-
-		z-index: 1;
-		.card {
-			min-width: 50%;
-			width: 68%;
-		}
-		.card-content {
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			gap: 5%;
-			height: fit-content;
-			padding-bottom: 10px;
-		}
-		.dropDownElement {
-			position: absolute;
-			top: unset;
-			left: 1px;
-			min-width: 380px;
-			max-width: 98%;
-			height: 422px;
-			bottom: 1px;
-		}
-		#creative {
-			width: unset;
-			font-size: 1rem;
-			word-break: break-all;
-		}
-	}
+    z-index: 1;
+    .card {
+      min-width: 50%;
+      width: 68%;
+    }
+    .card-content {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5%;
+      height: fit-content;
+      padding-bottom: 10px;
+    }
+    .dropDownElement {
+      position: absolute;
+      top: unset;
+      left: 1px;
+      min-width: 380px;
+      max-width: 98%;
+      height: 422px;
+      bottom: 1px;
+    }
+    #creative {
+      width: unset;
+      font-size: 1rem;
+      word-break: break-all;
+    }
+  }
 `;
 const LeftHeader = styled.div`
 	position: relative;

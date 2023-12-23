@@ -15,7 +15,6 @@ const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
               id={"ytId"}
               title={YtVideoUrl}
 			  width="400"
-			  playerControls='0'
               src={url}
               frameBorder={"1"}
               allowFullScreen></iframe>
