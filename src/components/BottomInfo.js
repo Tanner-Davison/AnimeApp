@@ -22,6 +22,12 @@ const BottomInfo = ({ tvType, episodes, rating }) => {
 				<h2>Rated </h2>
 				<p id={'ratingP'}>{rating}</p>
 			</Item>
+			<Item
+				className={'bottom-info-elements'}
+			id={'characters'}>
+				<p>View</p>
+				<Button>Characters</Button>
+			</Item>
 		</Wrapper>
 	);
 };
@@ -93,6 +99,8 @@ const Item = styled.div`
 	#ratingP{
 		font-size:.9rem;
 	}
+	
+	
 	@media screen and (max-width: 980px) {
 		flex-direction: column;
 		height: 60px;
@@ -103,3 +111,10 @@ const Item = styled.div`
 		}
 	}
 `;
+const Button = styled.button`
+background-color: transparent;
+color:white;
+font-family: Archivo;
+border:unset;
+font-size:larger;
+`

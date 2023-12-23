@@ -28,7 +28,7 @@ const FilteredPicker = ({pageData, handleSelection, currentSelection}) => {
               onMouseEnter={() => setShowHead(true)}>
               {option}
             </option>
-          );
+          )
         })}
       </select>
     </Wrapper>
