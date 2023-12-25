@@ -9,6 +9,8 @@ import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Reviews from "./Reviews";
 import FinalSaitama from './imgs/FinalSaitama.png';
+import getChars from "../API/getChars";
+import Characters from "./Characters";
 const AnimeCardComponent = ({
 	animeData,
 	
@@ -24,6 +26,8 @@ const AnimeCardComponent = ({
 	const releasedYear = animeData.year;
   const rating = animeData.rating;
   const [allReviews, setAllReviews] = useState([])
+  const [charsOpen, setCharsOpen] = useState(false);
+  const [characterData, setCharacterData] = useState([])
   const [openReviews, setOpenReviews] = useState(false);
 	const episodes =
 		tvType === "TV" || ("Special" && tvType !== null)
@@ -46,7 +50,22 @@ const AnimeCardComponent = ({
     }
     
   }
-	
+  const handleGetChars = async(animeId) => {
+    setLoading(true);
+   
+    if (characterData < 1) {
+      
+      const response = await getChars(animeId);
+      if (response) {
+        console.log('working')
+        setCharacterData(response);
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+     setCharsOpen(!charsOpen);
+  }
 	return (
 		<>
 			<CardWrapper
@@ -129,7 +148,10 @@ const AnimeCardComponent = ({
 					</BottomInfo>
 				</div>
 				<BottomHeader>
-					<DefaultButton>{"View Images"}</DefaultButton>
+					<DefaultButton onClick={() => handleGetChars(animeData.mal_id)}>
+						{"Characters"}
+					</DefaultButton>
+
 					<DefaultButton onClick={() => handleReviews()}>
 						{openReviews ? "Hide Reviews" : "See Reviews"}
 					</DefaultButton>
@@ -149,6 +171,7 @@ const AnimeCardComponent = ({
 					allReviews.map((item) => {
 						return <Reviews data={item} />;
 					})}
+				{charsOpen && <Characters charData={characterData} />}
 			</CardWrapper>
 		</>
 	);

@@ -18,6 +18,8 @@ import CopOutHeader from "./components/CopOutHeader";
 import gsap from "gsap";
 import { StyleSheetManager } from "styled-components";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+const MainPage = React.lazy(() => import('./components/MainPage'));
+
 const AnimeCardComponent = React.lazy(() =>
 	import("./components/AnimeCardComponent")
 );
@@ -161,7 +163,10 @@ function App() {
 									/>
 								)}
 							</Header>
-						</HeaderWrapper>
+            </HeaderWrapper>
+            {!searchResult && (
+              <MainPage></MainPage>
+            )}
 						{searchResult && (
 							<CopOutHeader
 								id={"TopPageCounter"}
