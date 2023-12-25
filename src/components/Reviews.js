@@ -39,7 +39,7 @@ const Reviews = ({ data }) => {
 			<StyledReview>
 				{reviewOpen && (
 					<Button onClick={() => setReviewOpen(!reviewOpen)}>
-						<em> ( ... Show Less )</em>
+						<em> ( . . . Show Less )</em>
 					</Button>
 				)}
 
@@ -50,8 +50,8 @@ const Reviews = ({ data }) => {
 					handleReviewOpen={() => setReviewOpen(!reviewOpen)}
 				/>
 				<ButtonRight onClick={() => setReviewOpen(!reviewOpen)}>
-					<em> {reviewOpen ? "( ... Show Less )" : "( ... Read More )"}</em>
-				</ButtonRight>
+					<em> {reviewOpen ? "( . . . Show Less )" : "( . . . Read More )"}</em>
+				</ButtonRight> 
 			</StyledReview>
 		</Wrapper>
 	);
@@ -69,6 +69,7 @@ const Wrapper = styled.div`
 	width: 100%;
 	border-radius: 15px;
 	border: 1px solid white;
+    margin-top:10px;
 `;
 const Header = styled.div`
 	position: relative;
@@ -89,11 +90,11 @@ const StyledReview = styled.p`
 	flex-direction: column;
 	font-family: Archivo;
 	margin: unset;
-	color: white;
+	color: snow;
 	text-align: left;
 	text-indent: 50px;
 	padding: 0px 22px 22px 22px;
-	line-height: 1.25rem;
+	line-height: 1.5rem;
 `;
 const NameDiv = styled.div`
 	position: relative;

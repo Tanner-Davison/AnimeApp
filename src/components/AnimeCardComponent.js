@@ -8,6 +8,7 @@ import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Reviews from "./Reviews";
+import FinalSaitama from './imgs/FinalSaitama.png';
 const AnimeCardComponent = ({
 	animeData,
 	
@@ -15,7 +16,8 @@ const AnimeCardComponent = ({
 	const [showsummary, setShowSummary] = useState(false);
 
 	const title = animeData.title_english || animeData.title;
-	const animeImg = animeData.images.jpg.image_url;
+  const animeImg = animeData.images.jpg.image_url;
+  const [loading, setLoading]= useState(false)
 	const score = animeData.score;
 	const scoredBy = animeData.scored_by;
 	const tvType = animeData.type;
@@ -30,19 +32,26 @@ const AnimeCardComponent = ({
 	const YtVideoUrl = animeData.trailer.youtube_id;
   const handleReviews = async () => {
     if (allReviews < 1) {
+      setLoading(true)
+    }
+    if (allReviews < 1) {
       let dataInfo = await getForumData(animeData.mal_id);
       setAllReviews(dataInfo);
-      return setOpenReviews(!openReviews);
+      
+      setOpenReviews(!openReviews);
+      return setLoading(false);
     } else {
-      return setOpenReviews(!openReviews);
+      setOpenReviews(!openReviews);
+      setLoading(false);
     }
+    
   }
 	
 	return (
 		<>
 			<CardWrapper
 				key={animeData.mal_id + 222}
-				showsummary={showsummary ? 'true': 'false'}>
+				showsummary={showsummary ? "true" : "false"}>
 				<div
 					className={"card"}
 					key={animeData.mal_id + 32}>
@@ -55,7 +64,7 @@ const AnimeCardComponent = ({
 								src={animeImg}
 								alt={"animeImg"}
 								loading='lazy'
-								onClick={()=>setShowSummary(!showsummary)}
+								onClick={() => setShowSummary(!showsummary)}
 							/>
 							{showsummary ? (
 								<DefaultButton
@@ -80,37 +89,36 @@ const AnimeCardComponent = ({
 							episodes={episodes}
 							score={score}
 							scoredBy={scoredBy}></RightComponent>
-					{showsummary && 
-						<div
-							key={animeData.mal_id + 34322}
-							className={
-								showsummary ? "dropDownElement" : "dropDownElement drop"
-							}>
-							<>
-								<div className={"flex"}>
-									<img
-										id={"synopsisImg"}
-										src={saitamaFaceOnly}
-										alt={"saitamaface"}
-										loading='lazy'
-									/>
-									<h3>Synopsis</h3>
-								</div>
-								<article showsummary>
-									{animeData.synopsis !== null
-										? animeData.synopsis
-										: "Synopsis not available for this title."}
-								</article>
-							</>
-							<CloseIcon
-								id={"close-icon"}
-								onClick={() => setShowSummary(false)}
-							/>
-						</div>
-									}
+						{showsummary && (
+							<div
+								key={animeData.mal_id + 34322}
+								className={
+									showsummary ? "dropDownElement" : "dropDownElement drop"
+								}>
+								<>
+									<div className={"flex"}>
+										<img
+											id={"synopsisImg"}
+											src={saitamaFaceOnly}
+											alt={"saitamaface"}
+											loading='lazy'
+										/>
+										<h3>Synopsis</h3>
+									</div>
+									<article showsummary>
+										{animeData.synopsis !== null
+											? animeData.synopsis
+											: "Synopsis not available for this title."}
+									</article>
+								</>
+								<CloseIcon
+									id={"close-icon"}
+									onClick={() => setShowSummary(false)}
+								/>
+							</div>
+						)}
 					</div>
-					
-							
+
 					<BottomInfo
 						key={animeData.mal_id}
 						tvType={tvType}
@@ -118,20 +126,29 @@ const AnimeCardComponent = ({
 						rating={rating}
 						episodes={episodes}>
 						{" "}
-							</BottomInfo>
+					</BottomInfo>
 				</div>
-
-        <DefaultButton
-          onClick={() => handleReviews()}>
-					Reviews
-        </DefaultButton>
-        {openReviews &&
-        
-          allReviews.length > 1 && allReviews.map((item) => {
-            return <Reviews data={item} />;
-          })
-        }
-        
+				<BottomHeader>
+					<DefaultButton>{"View Images"}</DefaultButton>
+					<DefaultButton onClick={() => handleReviews()}>
+						{openReviews ? "Hide Reviews" : "See Reviews"}
+					</DefaultButton>
+				</BottomHeader>
+				{loading && (
+					<Loading>
+						<img
+							src={FinalSaitama}
+							alt={"saitama Flying"}
+							id={"loadingSaitama"}
+						/>
+						<StyledH3>. . . Loading </StyledH3>
+					</Loading>
+				)}
+				{openReviews &&
+					allReviews.length > 1 &&
+					allReviews.map((item) => {
+						return <Reviews data={item} />;
+					})}
 			</CardWrapper>
 		</>
 	);
@@ -372,3 +389,25 @@ const LeftHeader = styled.div`
 		}
 	}
 `;
+const Loading = styled.div`
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+margin-top:20px;
+#loadingSaitama{
+  width:150px;
+  height: 120px;
+}
+`
+const StyledH3 = styled.h3`
+font-family: Archivo;
+color:white;
+`
+const BottomHeader = styled.div`
+position: relative;
+display: flex;
+flex-direction: row;
+gap: 20px;
+`
