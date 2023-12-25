@@ -5,11 +5,11 @@ const getForumData = async (animeId) => {
  console.log(typeof animeId)
  const options = {
    method: "GET",
-   url: `https://api.jikan.moe/v4/anime/${animeId}/forum`,
+   url: `https://api.jikan.moe/v4/anime/${animeId}/reviews`,
    params: {
-     id: `${animeId}`,
-       filter: 'all',
-       limit: 25,
+     page: 1,
+     preliminary: true,
+     spoiler: true,
      
    },
  };

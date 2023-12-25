@@ -7,7 +7,7 @@ import BottomInfo from "./BottomInfo";
 import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
-import checkLinkAvailability from "./checkLinkAvailability";
+import Reviews from "./Reviews";
 const AnimeCardComponent = ({
 	animeData,
 	
@@ -20,13 +20,16 @@ const AnimeCardComponent = ({
 	const scoredBy = animeData.scored_by;
 	const tvType = animeData.type;
 	const releasedYear = animeData.year;
-	const rating = animeData.rating;
+  const rating = animeData.rating;
+  const [allReviews, setAllReviews] = useState([])
 	const episodes =
 		tvType === "TV" || ("Special" && tvType !== null)
 			? animeData.episodes
 			: "N/A";
 	const YtVideoUrl = animeData.trailer.youtube_id;
-	
+  const handleReviews = () => {
+    setAllReviews(getForumData(animeData.mal_id));
+  }
 	useEffect(() => {
 		if (YtVideoUrl) {
 			console.log(YtVideoUrl)
@@ -116,9 +119,11 @@ const AnimeCardComponent = ({
 							</BottomInfo>
 				</div>
 
-				<DefaultButton onClick={() => getForumData(animeData.mal_id)}>
-					should be forum
-				</DefaultButton>
+        <DefaultButton
+          onClick={() => handleReviews()}>
+					Reviews
+        </DefaultButton>
+        <Reviews data={ allReviews} />
 			</CardWrapper>
 		</>
 	);
