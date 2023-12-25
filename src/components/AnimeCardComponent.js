@@ -22,20 +22,22 @@ const AnimeCardComponent = ({
 	const releasedYear = animeData.year;
   const rating = animeData.rating;
   const [allReviews, setAllReviews] = useState([])
+  const [openReviews, setOpenReviews] = useState(false);
 	const episodes =
 		tvType === "TV" || ("Special" && tvType !== null)
 			? animeData.episodes
 			: "N/A";
 	const YtVideoUrl = animeData.trailer.youtube_id;
-  const handleReviews = () => {
-    setAllReviews(getForumData(animeData.mal_id));
+  const handleReviews = async () => {
+    if (allReviews < 1) {
+      let dataInfo = await getForumData(animeData.mal_id);
+      setAllReviews(dataInfo);
+      return setOpenReviews(!openReviews);
+    } else {
+      return setOpenReviews(!openReviews);
+    }
   }
-	useEffect(() => {
-		if (YtVideoUrl) {
-			console.log(YtVideoUrl)
-		}
-		
-	 },[YtVideoUrl])
+	
 	return (
 		<>
 			<CardWrapper
@@ -123,7 +125,13 @@ const AnimeCardComponent = ({
           onClick={() => handleReviews()}>
 					Reviews
         </DefaultButton>
-        <Reviews data={ allReviews} />
+        {openReviews &&
+        
+          allReviews.length > 1 && allReviews.map((item) => {
+            return <Reviews data={item} />;
+          })
+        }
+        
 			</CardWrapper>
 		</>
 	);
