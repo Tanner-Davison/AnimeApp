@@ -13,19 +13,28 @@ const Characters = ({ charData }) => {
               const imgUrl = img.character.images.webp.image_url;
               const backUpImg = img.character.images.jpg.small_image_url;
               const role = img.role;
-            
+              if (charName === 'Narrator') {
+                  return;
+            }
               return (
-								<ImageWrapper>
-									<StyledImg
-										key={img.character.mal_id}
-										src={imgUrl}
-										alt={"character face"}
-									/>
-									<StyledName>{imgUrl || backUpImg ? charName : ""}</StyledName>
-									<StyledRole>
-										<em> {role} </em>
-									</StyledRole>
-								</ImageWrapper>
+                  <ImageWrapper>
+                      
+                          <StyledImg
+                              key={img.character.mal_id}
+                              src={imgUrl}
+                          alt={"character face"}
+                          mainRole={role=== 'Main'}
+                          />
+                     
+                      <StyledName
+                          mainRole={role === 'Main'}>
+                          {imgUrl || backUpImg ? charName : ""}
+                      </StyledName>
+                      <StyledRole
+                      mainRole={role === 'Main'}>
+							<em> {role} </em>
+						</StyledRole>
+						</ImageWrapper>
 							);
           })}
          
@@ -59,22 +68,25 @@ text-align: center;
 `
 const StyledName = styled.h3`
 font-family: Archivo;
-color:white;
+color:${(props)=> (props.mainRole ? 'gold':'white')};
 margin-bottom:unset;
 
 `
 const StyledImg = styled.img`
-height: 100px;
-width:100px;
-transition:transform .4s ease-in-out;
-&:hover{
-    transform:scale(1.1);
-    cursor: pointer;
-}
-`
+	height: 100px;
+	width: 100px;
+	transition: transform 0.4s ease-in-out;
+	outline: ${(props) => (props.mainRole ? "3px ridge gold" : "none")};
+    border-radius:10px;
+    box-sizing: border-box;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+`;
 const StyledRole = styled.p`
 font-family:Archivo;
 margin:unset;
-color:white;
-font-size: .5em;
+color:${(props)=> (props.mainRole ? 'yellow': 'white;')};
+font-size: .7em;
 `
