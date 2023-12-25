@@ -10,8 +10,8 @@ const StyledStars = React.lazy(() =>
 );
 const Reviews = ({ data }) => {
 	const [reviewOpen, setReviewOpen] = useState(false);
-    const photoImg = data.user.images.webp.image_url;
-    const regPhoto = data.user.images.jpg.image_url;
+	const photoImg = data.user.images.webp.image_url;
+	const regPhoto = data.user.images.jpg.image_url;
 	useEffect(() => {
 		if (data) {
 			console.log(data);
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 	align-items: left;
 	max-width: 600px;
 	width: 100%;
-    border-radius:15px;
+	border-radius: 15px;
 	border: 1px solid white;
 `;
 const Header = styled.div`
@@ -82,7 +82,6 @@ const StyledName = styled.h3`
 	color: white;
 	margin: unset;
 	padding-left: 10px;
-    
 `;
 const StyledReview = styled.p`
 	position: relative;
@@ -103,33 +102,32 @@ const NameDiv = styled.div`
 	width: fit-content;
 	align-items: center;
 	width: 50%;
-    padding:15px;
-    #profileImage{
-        border-radius: 50%;
-        width:50px;
-        height: 50px;
-    }
-	
+	padding: 15px;
+	#profileImage {
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+	}
 `;
 const Button = styled.button`
-    position:relative;
-    display: flex;
+	position: relative;
+	display: flex;
 	border: none;
-	color:red;
+	color: red;
 	font-family: Archivo;
 	background-color: transparent;
-    justify-content: flex-end;
-    align-items: flex-end;
+	justify-content: flex-end;
+	align-items: flex-end;
 	cursor: pointer;
 `;
 const ButtonRight = styled.button`
-    position:relative;
-    display: flex;
+	position: relative;
+	display: flex;
 	border: none;
 	color: red;
 	font-family: Archivo;
 	background-color: transparent;
 	cursor: pointer;
-    justify-content: flex-end;
-    align-items: flex-end;
+	justify-content: flex-end;
+	align-items: flex-end;
 `;
