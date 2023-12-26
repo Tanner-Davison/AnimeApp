@@ -65,17 +65,19 @@ const Wrapper = styled.div`
 	text-align: center;
 	flex-direction: column;
 	align-items: left;
-	max-width: 600px;
-	width: 100%;
+	max-width: 700px;
+	width: 70vw;
 	border-radius: 15px;
 	border: 1px solid white;
     margin-top:10px;
+	background-color: rgba(0,0,0,0.9);
 `;
 const Header = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	
 `;
 const StyledName = styled.h3`
 	position: relative;
@@ -90,7 +92,7 @@ const StyledReview = styled.p`
 	flex-direction: column;
 	font-family: Archivo;
 	margin: unset;
-	color: snow;
+	color: #cccccc;
 	text-align: left;
 	text-indent: 50px;
 	padding: 0px 22px 22px 22px;

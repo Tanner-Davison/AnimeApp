@@ -9,14 +9,12 @@ import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Reviews from "./Reviews";
 import FinalSaitama from './imgs/FinalSaitama.png';
-import getChars from "../API/getChars";
+import {getChars} from "../API/getChars";
 import Characters from "./Characters";
 const AnimeCardComponent = ({
 	animeData,
-	
 }) => {
 	const [showsummary, setShowSummary] = useState(false);
-
 	const title = animeData.title_english || animeData.title;
   const animeImg = animeData.images.jpg.image_url;
   const [loading, setLoading]= useState(false)
@@ -148,11 +146,15 @@ const AnimeCardComponent = ({
 					</BottomInfo>
 				</div>
 				<BottomHeader>
-					<DefaultButton onClick={() => handleGetChars(animeData.mal_id)}>
-						{"Characters"}
+          <DefaultButton
+            isActive={charsOpen === true}
+            onClick={() => handleGetChars(animeData.mal_id)}>
+						{charsOpen ? 'Close Characters':"View Characters"}
 					</DefaultButton>
 
-					<DefaultButton onClick={() => handleReviews()}>
+          <DefaultButton
+            isActive={openReviews === true}
+            onClick={() => handleReviews()}>
 						{openReviews ? "Hide Reviews" : "See Reviews"}
 					</DefaultButton>
 				</BottomHeader>

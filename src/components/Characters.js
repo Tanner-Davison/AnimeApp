@@ -1,6 +1,18 @@
 import {useState, useEffect} from 'react'
 import styled from 'styled-components';
+import { getFullChars } from '../API/getChars';
+
 const Characters = ({ charData }) => {
+    const [isCharOpen, setIsCharOpen] = useState(false);
+    const [fullCharData, setFullCharData] = useState([]);
+    const handleGetChar = async(animeId) => {
+        setFullCharData([])
+        if (fullCharData) {
+            let response = await getFullChars(animeId);
+            setFullCharData(response)
+        }
+        return setIsCharOpen(!isCharOpen);
+    }
     useEffect(() => {
         if (charData) {
             console.log(charData)
@@ -13,6 +25,7 @@ const Characters = ({ charData }) => {
               const imgUrl = img.character.images.webp.image_url;
               const backUpImg = img.character.images.jpg.small_image_url;
               const role = img.role;
+              const animeId = img.character.mal_id;
               if (charName === 'Narrator') {
                   return;
             }
@@ -20,9 +33,11 @@ const Characters = ({ charData }) => {
                   <ImageWrapper>
                       
                           <StyledImg
-                              key={img.character.mal_id}
-                              src={imgUrl}
+                          key={animeId}
+                          src={imgUrl}
+                          value={animeId}
                           alt={"character face"}
+                          onClick={()=>handleGetChar(animeId)}
                           mainRole={role=== 'Main'}
                           />
                      

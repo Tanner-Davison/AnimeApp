@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios";
-const getChars = async (animeId) => {
+export const getChars = async (animeId) => {
 	const options = {
 		method: "GET",
 		url: `https://api.jikan.moe/v4/anime/${animeId}/characters`,
@@ -14,4 +13,17 @@ const getChars = async (animeId) => {
 	}
 };
 
-export default getChars;
+export const getFullChars = async(charId) => {
+	const options = {
+		method: "GET",
+		url: `https://api.jikan.moe/v4/characters/${charId}/full`,
+	};
+	try {
+		const response = await axios.request(options);
+		console.log(response.data);
+		
+	} catch (err) {
+		console.log(err)
+	}
+}
+
