@@ -8,175 +8,189 @@ import getForumData from "../API/getForumData";
 import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Reviews from "./Reviews";
-import FinalSaitama from './imgs/FinalSaitama.png';
-import {getChars} from "../API/getChars";
+import FinalSaitama from "./imgs/FinalSaitama.png";
+import { getChars } from "../API/getChars";
 import Characters from "./Characters";
-const AnimeCardComponent = ({
-	animeData,
-}) => {
-	const [showsummary, setShowSummary] = useState(false);
-	const title = animeData.title_english || animeData.title;
+import { getFullChars } from "../API/getChars";
+  const CharacterModal = React.lazy(()=>import('./CharacterModal'));
+const AnimeCardComponent = ({ animeData }) => {
+  const [showsummary, setShowSummary] = useState(false);
+  const title = animeData.title_english || animeData.title;
   const animeImg = animeData.images.jpg.image_url;
-  const [loading, setLoading]= useState(false)
-	const score = animeData.score;
-	const scoredBy = animeData.scored_by;
-	const tvType = animeData.type;
-	const releasedYear = animeData.year;
+  const [loading, setLoading] = useState(false);
+  const score = animeData.score;
+  const scoredBy = animeData.scored_by;
+  const tvType = animeData.type;
+  const releasedYear = animeData.year;
   const rating = animeData.rating;
-  const [allReviews, setAllReviews] = useState([])
+  const [allReviews, setAllReviews] = useState([]);
   const [charsOpen, setCharsOpen] = useState(false);
-  const [characterData, setCharacterData] = useState([])
+  const [characterData, setCharacterData] = useState([]);
   const [openReviews, setOpenReviews] = useState(false);
-	const episodes =
-		tvType === "TV" || ("Special" && tvType !== null)
-			? animeData.episodes
-			: "N/A";
-	const YtVideoUrl = animeData.trailer.youtube_id;
+  const [isCharOpen, setIsCharOpen] = useState(false);
+  const [fullCharData, setFullCharData] = useState([]);
+
+  const episodes =
+    tvType === "TV" || ("Special" && tvType !== null)
+      ? animeData.episodes
+      : "N/A";
+  const YtVideoUrl = animeData.trailer.youtube_id;
   const handleReviews = async () => {
     if (allReviews < 1) {
-      setLoading(true)
+      setLoading(true);
     }
     if (allReviews < 1) {
       let dataInfo = await getForumData(animeData.mal_id);
       setAllReviews(dataInfo);
-      
+
       setOpenReviews(!openReviews);
       return setLoading(false);
     } else {
       setOpenReviews(!openReviews);
       setLoading(false);
     }
-    
-  }
-  const handleGetChars = async(animeId) => {
+  };
+   const handleGetCharFull = async (animeId) => {
+     let response = await getFullChars(animeId);
+	 setIsCharOpen(true)
+	 setCharsOpen(false)
+     if (response) {
+       setFullCharData(response);
+     } else {
+       return console.log("no data on chars given. in Characters component.");
+     }
+   };
+  const handleGetChars = async (animeId) => {
     setLoading(true);
-   
+
     if (characterData < 1) {
-      
       const response = await getChars(animeId);
       if (response) {
-        console.log('working')
+        console.log("working");
         setCharacterData(response);
         setLoading(false);
       }
     } else {
       setLoading(false);
     }
-     setCharsOpen(!charsOpen);
-  }
-	return (
-		<>
-			<CardWrapper
-				key={animeData.mal_id + 222}
-				showsummary={showsummary ? "true" : "false"}>
-				<div
-					className={"card"}
-					key={animeData.mal_id + 32}>
-					<h3 id='creative'> {title}</h3>
-					<div
-						key={animeData.mal_id + 2322}
-						className={"card-content"}>
-						<LeftHeader key={animeData.mal_id + 12223}>
-							<img
-								src={animeImg}
-								alt={"animeImg"}
-								loading='lazy'
-								onClick={() => setShowSummary(!showsummary)}
-							/>
-							{showsummary ? (
-								<DefaultButton
-									key={animeData.mal_id + 443}
-									onClick={() => {
-										setShowSummary(false);
-									}}>
-									Hide summary
-								</DefaultButton>
-							) : (
-								<HipsterButton
-									key={animeData.mal_id + 940}
-									id={animeData.synopsis === null ? "disabled" : ""}
-									onClick={() => setShowSummary(true)}>
-									Read Summary
-								</HipsterButton>
-							)}
-						</LeftHeader>
-						<RightComponent
-							key={animeData.mal_id + 323}
-							YtVideoUrl={YtVideoUrl}
-							episodes={episodes}
-							score={score}
-							scoredBy={scoredBy}></RightComponent>
-						{showsummary && (
-							<div
-								key={animeData.mal_id + 34322}
-								className={
-									showsummary ? "dropDownElement" : "dropDownElement drop"
-								}>
-								<>
-									<div className={"flex"}>
-										<img
-											id={"synopsisImg"}
-											src={saitamaFaceOnly}
-											alt={"saitamaface"}
-											loading='lazy'
-										/>
-										<h3>Synopsis</h3>
-									</div>
-									<article showsummary>
-										{animeData.synopsis !== null
-											? animeData.synopsis
-											: "Synopsis not available for this title."}
-									</article>
-								</>
-								<CloseIcon
-									id={"close-icon"}
-									onClick={() => setShowSummary(false)}
-								/>
-							</div>
-						)}
-					</div>
+    setCharsOpen(!charsOpen);
+  };
+  return (
+    <>
+      <CardWrapper
+        key={animeData.mal_id + 222}
+        showsummary={showsummary ? "true" : "false"}>
+        <div className={"card"} key={animeData.mal_id + 32}>
+          <h3 id="creative"> {title}</h3>
+          <div key={animeData.mal_id + 2322} className={"card-content"}>
+            <LeftHeader key={animeData.mal_id + 12223}>
+              <img
+                src={animeImg}
+                alt={"animeImg"}
+                loading="lazy"
+                onClick={() => setShowSummary(!showsummary)}
+              />
+              {showsummary ? (
+                <DefaultButton
+                  key={animeData.mal_id + 443}
+                  onClick={() => {
+                    setShowSummary(false);
+                  }}>
+                  Hide summary
+                </DefaultButton>
+              ) : (
+                <HipsterButton
+                  key={animeData.mal_id + 940}
+                  id={animeData.synopsis === null ? "disabled" : ""}
+                  onClick={() => setShowSummary(true)}>
+                  Read Summary
+                </HipsterButton>
+              )}
+            </LeftHeader>
+            <RightComponent
+              key={animeData.mal_id + 323}
+              YtVideoUrl={YtVideoUrl}
+              episodes={episodes}
+              score={score}
+              scoredBy={scoredBy}></RightComponent>
+            {showsummary && (
+              <div
+                key={animeData.mal_id + 34322}
+                className={
+                  showsummary ? "dropDownElement" : "dropDownElement drop"
+                }>
+                <>
+                  <div className={"flex"}>
+                    <img
+                      id={"synopsisImg"}
+                      src={saitamaFaceOnly}
+                      alt={"saitamaface"}
+                      loading="lazy"
+                    />
+                    <h3>Synopsis</h3>
+                  </div>
+                  <article showsummary>
+                    {animeData.synopsis !== null
+                      ? animeData.synopsis
+                      : "Synopsis not available for this title."}
+                  </article>
+                </>
+                <CloseIcon
+                  id={"close-icon"}
+                  onClick={() => setShowSummary(false)}
+                />
+              </div>
+            )}
+          </div>
 
-					<BottomInfo
-						key={animeData.mal_id}
-						tvType={tvType}
-						releasedYear={releasedYear}
-						rating={rating}
-						episodes={episodes}>
-						{" "}
-					</BottomInfo>
-				</div>
-				<BottomHeader>
+          <BottomInfo
+            key={animeData.mal_id}
+            tvType={tvType}
+            releasedYear={releasedYear}
+            rating={rating}
+            episodes={episodes}>
+            {" "}
+          </BottomInfo>
+        </div>
+        <BottomHeader>
           <DefaultButton
             isActive={charsOpen === true}
             onClick={() => handleGetChars(animeData.mal_id)}>
-						{charsOpen ? 'Close Characters':"View Characters"}
-					</DefaultButton>
+            {charsOpen ? "Close Characters" : "View Characters"}
+          </DefaultButton>
 
           <DefaultButton
             isActive={openReviews === true}
             onClick={() => handleReviews()}>
-						{openReviews ? "Hide Reviews" : "See Reviews"}
-					</DefaultButton>
-				</BottomHeader>
-				{loading && (
-					<Loading>
-						<img
-							src={FinalSaitama}
-							alt={"saitama Flying"}
-							id={"loadingSaitama"}
-						/>
-						<StyledH3>. . . Loading </StyledH3>
-					</Loading>
-				)}
-				{openReviews &&
-					allReviews.length > 1 &&
-					allReviews.map((item) => {
-						return <Reviews data={item} />;
-					})}
-				{charsOpen && <Characters charData={characterData} />}
-			</CardWrapper>
-		</>
-	);
+            {openReviews ? "Hide Reviews" : "See Reviews"}
+          </DefaultButton>
+        </BottomHeader>
+        {loading && (
+          <Loading>
+            <img
+              src={FinalSaitama}
+              alt={"saitama Flying"}
+              id={"loadingSaitama"}
+            />
+            <StyledH3>. . . Loading </StyledH3>
+          </Loading>
+        )}
+        {openReviews &&
+          allReviews.length > 1 &&
+          allReviews.map((item) => {
+            return <Reviews data={item} />;
+          })}
+        {charsOpen && (
+          <Characters
+            handleGetCharFull={handleGetCharFull}
+            charData={characterData}
+			
+          />
+        )}
+        {isCharOpen && <CharacterModal data={fullCharData} />}
+      </CardWrapper>
+    </>
+  );
 };
 
 export default AnimeCardComponent;
@@ -382,57 +396,57 @@ const CardWrapper = styled.div`
   }
 `;
 const LeftHeader = styled.div`
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
-	height: 100%;
-	gap: 25px;
-	width: fit-content;
-	z-index: 1;
-	img {
-		position: relative;
-		width: 12rem;
-		border-radius: 17px;
-		transition: transform 0.3s ease-in-out;
-		cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  gap: 25px;
+  width: fit-content;
+  z-index: 1;
+  img {
+    position: relative;
+    width: 12rem;
+    border-radius: 17px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
 
-		z-index: -3;
-	}
-	img:hover {
-		transform: scale(1.2);
-	}
-	#defaultButton {
-		z-index: 5;
-	}
+    z-index: -3;
+  }
+  img:hover {
+    transform: scale(1.2);
+  }
+  #defaultButton {
+    z-index: 5;
+  }
 
-	@media screen and (max-width: 980px) {
-		img {
-			width: 12.5rem;
-			margin-top: 1.2rem;
-		}
-	}
+  @media screen and (max-width: 980px) {
+    img {
+      width: 12.5rem;
+      margin-top: 1.2rem;
+    }
+  }
 `;
 const Loading = styled.div`
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: row;
-margin-top:20px;
-#loadingSaitama{
-  width:150px;
-  height: 120px;
-}
-`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
+  #loadingSaitama {
+    width: 150px;
+    height: 120px;
+  }
+`;
 const StyledH3 = styled.h3`
-font-family: Archivo;
-color:white;
-`
+  font-family: Archivo;
+  color: white;
+`;
 const BottomHeader = styled.div`
-position: relative;
-display: flex;
-flex-direction: row;
-gap: 20px;
-`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;

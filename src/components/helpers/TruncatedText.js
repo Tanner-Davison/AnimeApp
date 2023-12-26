@@ -17,15 +17,4 @@ const MaxCharParagraph = ({ text, maxLength }) => {
 
 export default MaxCharParagraph;
 
-const ButtonRight = styled.button`
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	text-align: center;
-	width: fit-content;
-`;
-const Wrapper = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: row;
-`;
+

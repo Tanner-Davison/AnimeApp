@@ -40,14 +40,6 @@ function App() {
 	const [isColorToolOpen, setIsColorToolOpen] = useState(false);
 	const [currentSelection, setCurrentSelection] = useState("");
 
-	// const handleScroll = () => {
-	//   console.log("running");
-	//   const element = document.getElementById("headerId");
-	//   element.scrollIntoView({
-	//     behavior: "smooth",
-	//     block: "start",
-	//   });
-	// };
 	const handleSelection = (e) => {
 		console.log("running selection");
 
@@ -62,14 +54,6 @@ function App() {
 		});
 	};
 
-	// const scrollToBottom = () => {
-	//   const bottom = document.getElementById("bottomElement");
-	//   bottom.scrollIntoView({
-	// 	behavior: "smooth",
-	// 	block: "end",
-	// 	inline: "nearest",
-	//   });
-	// };
 	const scrollToBottom = () => {
 		const wrappered = document.getElementById("wrapper");
 		gsap.to(wrappered, {
