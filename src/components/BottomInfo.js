@@ -41,7 +41,7 @@ const Wrapper = styled.div`
 	color: white;
 	align-items: center;
 	justify-content: center;
-	gap: 10%;
+	gap: 20px;
 	font-family: Archivo;
 	text-align: center;
 	margin-bottom: 20px;

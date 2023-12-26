@@ -20,18 +20,18 @@ const CharacterModal = ({ data }) => {
         <Heading>About {title}</Heading>
         <StyledParagraph>{about}</StyledParagraph>
       </ContentWrapper>
-      {nickNames && (
-        nickNames.map((nickname)=>{
-          return (
-            <NickNameWrapper>
-              <Heading>- Nicknames -</Heading>
-              <NickNameRow>
-                <StyledParagraph id={'nickname'}>{nickname}</StyledParagraph>
-              </NickNameRow>
-            </NickNameWrapper>
-          );
-        })
-      )}
+
+      <NickNameWrapper>
+        <Heading>- Nicknames -</Heading>
+        <NickNameRow>
+          {nickNames &&
+            nickNames.map((nickname) => {
+              return (
+                <StyledNickName id={"nickname"}>{nickname},</StyledNickName>
+              );
+            })}
+        </NickNameRow>
+      </NickNameWrapper>
     </Wrapper>
   );
 };
@@ -81,6 +81,13 @@ const StyledParagraph = styled.p`
   word-spacing: .2em;
   margin-bottom:unset;
  
+`;
+const StyledNickName = styled.p`
+  font-family: Archivo;
+  color: lightsalmon;
+  line-height: 1.3em;
+  word-spacing: 0.2em;
+  margin-bottom: unset;
 `;
 const Heading = styled.h3`
 font-family:Archivo;
