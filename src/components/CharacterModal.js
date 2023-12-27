@@ -8,9 +8,7 @@ const CharacterModal = ({ data }) => {
   const kanjiName = content.name_kanji;
   const about = content.about;
   const nickNames = content.nicknames;
-  useEffect(() => {
-    console.log(data.data.name);
-  }, []);
+ 
   return (
     <Wrapper>
       <Title>{title}</Title>
