@@ -22,12 +22,6 @@ const BottomInfo = ({ tvType, episodes, rating }) => {
 				<h2>Rated </h2>
 				<p id={'ratingP'}>{rating}</p>
 			</Item>
-			<Item
-				className={'bottom-info-elements'}
-			id={'characters'}>
-				<p>View</p>
-				<Button>Characters</Button>
-			</Item>
 		</Wrapper>
 	);
 };
