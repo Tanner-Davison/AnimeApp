@@ -20,7 +20,7 @@ const CharacterModal = ({ data }) => {
       </ContentWrapper>
 
       <NickNameWrapper>
-        <Heading>- Nicknames -</Heading>
+        <Heading>- Given Nicknames-</Heading>
         <NickNameRow>
           {nickNames &&
             nickNames.map((nickname) => {
