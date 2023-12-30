@@ -25,7 +25,7 @@ const CharacterModal = ({ data }) => {
           {nickNames &&
             nickNames.map((nickname) => {
               return (
-                <StyledNickName id={"nickname"}>{nickname},</StyledNickName>
+                <StyledNickName id={"nickname"}>{nickname+'NickName'},</StyledNickName>
               );
             })}
         </NickNameRow>
