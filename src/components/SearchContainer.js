@@ -28,7 +28,7 @@ const SearchContainer = ({
           placeholder={searchQuery}
           onChange={(e) => onQueryChange(e.target.value)}
         />
-        <Button color="primary" variant="contained" onClick={onSearch}>
+        <Button id={'buttonId'}  color="primary" variant="contained" onClick={onSearch}>
           Search
         </Button>
         <SettingsTool
@@ -48,6 +48,11 @@ const SearchDiv = styled.div`
   display: flex;
   justify-content: center;
   height: 35px;
+  #buttonId{
+    font-size: 12px;
+    font-family: Archivo;
+    width:50px;
+}
 `;
 
 const StyledInput = styled.input`

@@ -52,7 +52,7 @@ const Wrapper = styled.div`
     font-family: Archivo;
     text-transform: uppercase;
     border-radius: 5px;
-    width: 150px;
+  
     min-width: fit-content;
     height: 100%;
     transition: width 0.4s ease;
