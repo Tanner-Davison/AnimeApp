@@ -344,7 +344,7 @@ const HeaderWrapper = styled.div`
 		}
 	}
 	@media screen and (max-width: 980px) {
-		width:80vw;
+		width:100vw;
 	}
 `;
 
