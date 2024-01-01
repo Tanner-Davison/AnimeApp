@@ -313,7 +313,7 @@ const Header = styled.div`
 	justify-content: center;
 	top: 0px;
 	width: 50vw;
-	min-width: 283px;
+	min-width:fit-content;
 	height: auto;
 	border-radius: 18px;
 	margin: 1rem auto;
@@ -342,6 +342,9 @@ const HeaderWrapper = styled.div`
 		to {
 			transform: translateY(0);
 		}
+	}
+	@media screen and (max-width: 980px) {
+		width:80vw;
 	}
 `;
 
