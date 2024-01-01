@@ -1,11 +1,9 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import ComplexTitle from "./ComplexTitle";
-import SaitamasFace from './imgs/SaitamasFace.webp';
 
 const RightComponent = ({episodes, score, scoredBy, YtVideoUrl}) => {
-    const [ratedByUsers, setRatedByUsers]= useState(scoredBy !== null ? scoredBy.toLocaleString() : null);
+    const ratedByUsers = scoredBy !== null ? scoredBy.toLocaleString() : null
    const url = `https://www.youtube.com/embed/${YtVideoUrl}`;
     return (
       <>

@@ -1,11 +1,6 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getFullChars } from "../API/getChars";
-import CharacterModal from './CharacterModal';
-const Characters = ({ charData, handleGetCharFull, isCharOpen }) => {
-  
- 
 
+const Characters = ({ charData, handleGetCharFull, isCharOpen }) => {
   return (
     <>
       <Wrapper>
@@ -58,7 +53,6 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   padding: 15px;
   border-radius: 15px;
-  
 `;
 const ImageWrapper = styled.div`
   position: relative;

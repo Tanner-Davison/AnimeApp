@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+
 
 const MaxCharParagraph = ({ text, maxLength }) => {
 	const [truncatedText, setTruncatedText] = useState(text);

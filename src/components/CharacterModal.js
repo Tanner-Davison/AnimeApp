@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 const CharacterModal = ({ data }) => {
@@ -7,8 +6,8 @@ const CharacterModal = ({ data }) => {
   const characterImg = content.images.webp.image_url;
   const kanjiName = content.name_kanji;
   const about = content.about;
-  const nickNames = content?.nicknames ?? null;
- 
+  const nickNames = content?.nicknames?.length > 0 ? content.nicknames : null;
+
   return (
     <Wrapper>
       <Title>{title}</Title>
@@ -20,12 +19,23 @@ const CharacterModal = ({ data }) => {
       </ContentWrapper>
 
       <NickNameWrapper>
-        <Heading>{nickNames !== null ? 'Nicknames': ''}</Heading>
+        <Heading>
+          { nickNames?.length <= 1 &&
+            "Nickname"
+            }
+            {
+              nickNames?.length >1 && 
+              'Nicknames'
+            }
+        </Heading>
         <NickNameRow>
           {nickNames &&
             nickNames.map((nickname) => {
               return (
-                <StyledNickName id={"nickname"}>{nickname},</StyledNickName>
+                <StyledNickName id={"nickname"}>
+                  {nickname}
+                  {nickNames !== null ? "" : ","}
+                </StyledNickName>
               );
             })}
         </NickNameRow>
@@ -70,15 +80,14 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding:25px;
+  padding: 25px;
 `;
 const StyledParagraph = styled.p`
   font-family: Archivo;
   color: #cccccc;
   line-height: 1.3em;
-  word-spacing: .2em;
-  margin-bottom:unset;
- 
+  word-spacing: 0.2em;
+  margin-bottom: unset;
 `;
 const StyledNickName = styled.p`
   font-family: Archivo;
@@ -88,11 +97,11 @@ const StyledNickName = styled.p`
   margin-bottom: unset;
 `;
 const Heading = styled.h3`
-font-family:Archivo;
-color:white;
-margin-bottom:5px;
-margin-top:25px;
-text-decoration: underline;
+  font-family: Archivo;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 25px;
+  text-decoration: underline;
 `;
 const NickNameWrapper = styled.div`
   position: relative;
@@ -100,10 +109,9 @@ const NickNameWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: auto;
-  
 `;
 const NickNameRow = styled.div`
-display:flex;
-flex-direction: row;
-gap:5px;
-`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`;

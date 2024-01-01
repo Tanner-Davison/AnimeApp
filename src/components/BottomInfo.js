@@ -105,10 +105,3 @@ const Item = styled.div`
 		}
 	}
 `;
-const Button = styled.button`
-background-color: transparent;
-color:white;
-font-family: Archivo;
-border:unset;
-font-size:larger;
-`

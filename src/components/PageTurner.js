@@ -28,6 +28,7 @@ const PageTurner = ({
 	useEffect(() => {
 		setPages([]);
 		getAllPageNums();
+		//eslint-disable-next-line
 	}, [pageData]);
 	return (
 		<Wrapper>

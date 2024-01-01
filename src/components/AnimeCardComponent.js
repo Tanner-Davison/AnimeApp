@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import React from "react";
 import { HipsterButton, DefaultButton } from "./Buttons";
 import RightComponent from "./RightComponent";
