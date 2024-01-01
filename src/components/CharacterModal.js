@@ -7,7 +7,7 @@ const CharacterModal = ({ data }) => {
   const characterImg = content.images.webp.image_url;
   const kanjiName = content.name_kanji;
   const about = content.about;
-  const nickNames = content.nicknames;
+  const nickNames = content?.nicknames ?? null;
  
   return (
     <Wrapper>
@@ -20,7 +20,7 @@ const CharacterModal = ({ data }) => {
       </ContentWrapper>
 
       <NickNameWrapper>
-        <Heading>- Given Nicknames-</Heading>
+        <Heading>{nickNames !== null ? 'Nicknames': ''}</Heading>
         <NickNameRow>
           {nickNames &&
             nickNames.map((nickname) => {
@@ -92,6 +92,7 @@ font-family:Archivo;
 color:white;
 margin-bottom:5px;
 margin-top:25px;
+text-decoration: underline;
 `;
 const NickNameWrapper = styled.div`
   position: relative;
