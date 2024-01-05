@@ -3,27 +3,27 @@ import styled from "styled-components";
 
 const BottomInfo = ({ tvType, episodes, rating }) => {
 	return (
-		<Wrapper>
-			<Item
-				className={"bottom-info-elements"}
-				id={"tvType"}>
-				<h2> Type </h2>
-				<p>{tvType}</p>
-			</Item>
-			<Item
-				className={"bottom-info-elements"}
-				id={"episodes"}>
-				<h2> Episodes </h2>
-				<p id={"episodeNumWrapper"}>{episodes}</p>
-			</Item>
-			<Item
-				className={"bottom-info-elements"}
-				id={"rating"}>
-				<h2>Rated </h2>
-				<p id={'ratingP'}>{rating}</p>
-			</Item>
-		</Wrapper>
-	);
+    <Wrapper>
+      <Item className={"bottom-info-elements"} id={"tvType"}>
+        <h2>
+          {" "}
+          <em>Type </em>{" "}
+        </h2>
+        <p>{tvType}</p>
+      </Item>
+      <Item className={"bottom-info-elements"} id={"episodes"}>
+        <h2>
+          {" "}
+          <em>Episodes </em>{" "}
+        </h2>
+        <p id={"episodeNumWrapper"}>{episodes}</p>
+      </Item>
+      <Item className={"bottom-info-elements"} id={"rating"}>
+        <h2>Rating </h2>
+        <p id={"ratingP"}>{rating}</p>
+      </Item>
+    </Wrapper>
+  );
 };
 
 export default BottomInfo;

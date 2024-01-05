@@ -12,7 +12,9 @@ import FinalSaitama from "./imgs/FinalSaitama.png";
 import { getChars } from "../API/getChars";
 import Characters from "./Characters";
 import { getFullChars } from "../API/getChars";
-  const CharacterModal = React.lazy(()=>import('./CharacterModal'));
+
+const CharacterModal = React.lazy(()=>import('./CharacterModal'));
+
 const AnimeCardComponent = ({ animeData }) => {
   const [showsummary, setShowSummary] = useState(false);
   const title = animeData.title_english || animeData.title;
