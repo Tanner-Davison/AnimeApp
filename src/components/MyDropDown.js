@@ -13,7 +13,7 @@ const MyDropDown = () => {
   return (
     <Wrapper>
       <Menu>
-        <Menu.Button id={"MenuButton"}> Search Filters </Menu.Button>
+        <Menu.Button id={"MenuButton"}>{activeLink !== null ? activeLink : 'category'} </Menu.Button>
         <Menu.Items>
           {allLinks.map((item) => (
             <Menu.Item key={item}>
@@ -36,20 +36,21 @@ const MyDropDown = () => {
 export default MyDropDown;
 
 const Wrapper = styled.div`
-  position: static;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: ARCHIVO;
-
-  #MenuButton {
-    background-color: white;
-    font-family: Archivo;
-  }
+	position: static;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-family: ARCHIVO;
+	width: fit-content;
+	#MenuButton {
+		background-color: white;
+		font-family: Archivo;
+	}
 `;
 const DivItem = styled.div`
   position: relative;
   display: flex;
+  width:100%;
   background-color: ${({ active }) => (active ? "purple" : "white")};
 `;
 const StyledP = styled.p`
