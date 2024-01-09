@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Menu } from "@headlessui/react";
-const MyDropDown = () => {
+const MyDropDown = ({children}) => {
   const [activeLink, setActiveLink] = useState(null); // State to track the active link
 
   const handleItemClick = (item) => {
@@ -13,7 +13,7 @@ const MyDropDown = () => {
   return (
     <Wrapper>
       <Menu>
-        <Menu.Button id={"MenuButton"}> Search Filters </Menu.Button>
+        <Menu.Button id={"MenuButton"}> {children} </Menu.Button>
         <Menu.Items>
           {allLinks.map((item) => (
             <Menu.Item key={item}>

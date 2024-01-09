@@ -14,7 +14,7 @@ const MainPage = () => {
     },[])
   return (
     <Wrapper>
-      <MyDropDown/>
+      <MyDropDown>Custom Button</MyDropDown>
     </Wrapper>
   )
 }
