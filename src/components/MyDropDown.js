@@ -13,11 +13,7 @@ const MyDropDown = ({children}) => {
   return (
     <Wrapper>
       <Menu>
-<<<<<<< HEAD
-        <Menu.Button id={"MenuButton"}> {children} </Menu.Button>
-=======
         <Menu.Button id={"MenuButton"}>{activeLink !== null ? activeLink : 'category'} </Menu.Button>
->>>>>>> e06d60c84b9e8e3d406de4dd1994a20559ba4af6
         <Menu.Items>
           {allLinks.map((item) => (
             <Menu.Item key={item}>
