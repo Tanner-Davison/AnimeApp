@@ -8,7 +8,7 @@ const MyDropDown = () => {
     setActiveLink(item); // Set the active link when clicked
   };
 
-  const allLinks = ["TV", "Episode", "Ova", "Anime"];
+  const allLinks = ["TV", "Episode", "Ova", "Anime","Add One More"];
 
   return (
     <Wrapper>
