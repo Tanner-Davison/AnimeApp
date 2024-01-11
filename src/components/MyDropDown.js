@@ -1,8 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Menu } from "@headlessui/react";
+<<<<<<< HEAD
 const MyDropDown = () => {
 	const [activeLink, setActiveLink] = useState(null); // State to track the active link
+=======
+const MyDropDown = ({children}) => {
+  const [activeLink, setActiveLink] = useState(null); // State to track the active link
+>>>>>>> 2c872918b320d208b3c29a0dce768bfd53295db6
 
 	const handleItemClick = (item) => {
 		setActiveLink(item); // Set the active link when clicked
