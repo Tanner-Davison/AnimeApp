@@ -244,9 +244,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 99vw;
-  background-image: url(${standingSaitama}), url(${smallOnePunch});
+ 
   background: url(${standingSaitama}) left top 20px,
-    url(${smallOnePunch}) right top;
+    url(${standingSaitama}) right top;
   background-repeat: no-repeat;
   background-size: contain;
   background-color: ${({ pickedcolor }) =>

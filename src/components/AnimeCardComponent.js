@@ -160,7 +160,7 @@ const AnimeCardComponent = ({ animeData }) => {
             onClick={() => handleGetChars(animeData.mal_id)}>
             {charsOpen ? "Close Characters" : "View Characters"}
           </DefaultButton>
-
+                      
           <DefaultButton
             isactive={openReviews === true}
             onClick={() => handleReviews()}>
