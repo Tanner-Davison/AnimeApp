@@ -156,13 +156,13 @@ const AnimeCardComponent = ({ animeData }) => {
         </div>
         <BottomHeader>
           <DefaultButton
-            isActive={charsOpen === true}
+            isactive={charsOpen === true}
             onClick={() => handleGetChars(animeData.mal_id)}>
             {charsOpen ? "Close Characters" : "View Characters"}
           </DefaultButton>
 
           <DefaultButton
-            isActive={openReviews === true}
+            isactive={openReviews === true}
             onClick={() => handleReviews()}>
             {openReviews ? "Hide Reviews" : "See Reviews"}
           </DefaultButton>

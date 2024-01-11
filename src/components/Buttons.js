@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DefaultButton = styled.button`
-	background-color: ${(props) => (props.isActive ? "red" : "#645cff")};
+	background-color: ${(props) => (props.isactive ? "red" : "#645cff")};
 	color: #fff;
 	font-weight: 700;
 	border: none;
