@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState} from "react";
+import { useState } from "react";
 import React from "react";
 import { HipsterButton, DefaultButton } from "./Buttons";
 import RightComponent from "./RightComponent";
@@ -12,8 +12,8 @@ import FinalSaitama from "./imgs/FinalSaitama.png";
 import { getChars } from "../API/getChars";
 import Characters from "./Characters";
 import { getFullChars } from "../API/getChars";
-
-const CharacterModal = React.lazy(()=>import('./CharacterModal'));
+import text from './styles/text';
+const CharacterModal = React.lazy(() => import("./CharacterModal"));
 
 const AnimeCardComponent = ({ animeData }) => {
   const [showsummary, setShowSummary] = useState(false);
@@ -52,16 +52,16 @@ const AnimeCardComponent = ({ animeData }) => {
       setLoading(false);
     }
   };
-   const handleGetCharFull = async (animeId) => {
-     let response = await getFullChars(animeId);
-	 setIsCharOpen(true)
-	 setCharsOpen(false)
-     if (response) {
-       setFullCharData(response);
-     } else {
-       return console.log("no data on chars given. in Characters component.");
-     }
-   };
+  const handleGetCharFull = async (animeId) => {
+    let response = await getFullChars(animeId);
+    setIsCharOpen(true);
+    setCharsOpen(false);
+    if (response) {
+      setFullCharData(response);
+    } else {
+      return console.log("no data on chars given. in Characters component.");
+    }
+  };
   const handleGetChars = async (animeId) => {
     setLoading(true);
 
@@ -81,7 +81,7 @@ const AnimeCardComponent = ({ animeData }) => {
     <>
       <CardWrapper
         key={animeData.mal_id + 222}
-        showsummary={showsummary ? "true" : "false"}>
+        showsummary={showsummary}>
         <div className={"card"} key={animeData.mal_id + 32}>
           <h3 id="creative"> {title}</h3>
           <div key={animeData.mal_id + 2322} className={"card-content"}>
@@ -160,7 +160,7 @@ const AnimeCardComponent = ({ animeData }) => {
             onClick={() => handleGetChars(animeData.mal_id)}>
             {charsOpen ? "Close Characters" : "View Characters"}
           </DefaultButton>
-                      
+
           <DefaultButton
             isactive={openReviews === true}
             onClick={() => handleReviews()}>
@@ -186,7 +186,6 @@ const AnimeCardComponent = ({ animeData }) => {
           <Characters
             handleGetCharFull={handleGetCharFull}
             charData={characterData}
-			
           />
         )}
         {isCharOpen && <CharacterModal data={fullCharData} />}
@@ -316,7 +315,7 @@ const CardWrapper = styled.div`
     display: flex;
     border-radius: 17px;
     padding: 2rem 1rem;
-    font-family: "Archivo", sans-serif;
+    font-family: ${text.medi};
     background-color: snow;
     line-height: 1.9rem;
 
