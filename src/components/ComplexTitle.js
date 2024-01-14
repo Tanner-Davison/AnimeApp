@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import saitamaAndFriends from './imgs/saitamaAndFriends.png';
 const ComplexTitle = ({title}) => {
-  console.log('git pull for git hub');
   
   return (
     
