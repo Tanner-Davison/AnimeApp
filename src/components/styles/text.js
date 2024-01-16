@@ -1,4 +1,4 @@
-import media from "styles/media";
+import media from './media'
 
 const text = {
   headline: `
