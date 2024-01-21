@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-// console.log('hello")
+
 const StyledStars = ({ number }) => {
 	const stars = number / 2;
 	const filledStars = Math.floor(stars);

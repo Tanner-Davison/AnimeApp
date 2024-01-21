@@ -1,18 +1,16 @@
-import styled from "styled-components";
-import { useState } from "react";
-import React from "react";
-import { HipsterButton, DefaultButton } from "./Buttons";
-import RightComponent from "./RightComponent";
-import BottomInfo from "./BottomInfo";
-import getForumData from "../API/getForumData";
-import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
 import CloseIcon from "@mui/icons-material/Close";
-import Reviews from "./Reviews";
-import FinalSaitama from "./imgs/FinalSaitama.png";
-import { getChars } from "../API/getChars";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { getChars, getFullChars } from "../API/getChars";
+import getForumData from "../API/getForumData";
+import BottomInfo from "./BottomInfo";
+import { DefaultButton, HipsterButton } from "./Buttons";
 import Characters from "./Characters";
-import { getFullChars } from "../API/getChars";
-import text from './styles/text';
+import Reviews from "./Reviews";
+import RightComponent from "./RightComponent";
+import FinalSaitama from "./imgs/FinalSaitama.png";
+import saitamaFaceOnly from "./imgs/saitamaFaceOnly.png";
+import text from "./styles/text";
 const CharacterModal = React.lazy(() => import("./CharacterModal"));
 
 const AnimeCardComponent = ({ animeData }) => {
@@ -79,9 +77,7 @@ const AnimeCardComponent = ({ animeData }) => {
   };
   return (
     <>
-      <CardWrapper
-        key={animeData.mal_id + 222}
-        showsummary={showsummary}>
+      <CardWrapper key={animeData.mal_id + 222} showsummary={showsummary}>
         <div className={"card"} key={animeData.mal_id + 32}>
           <h3 id="creative"> {title}</h3>
           <div key={animeData.mal_id + 2322} className={"card-content"}>
